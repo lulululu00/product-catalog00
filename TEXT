@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>產品規格目錄</title>
+<style>*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width:900px){.container{max-width:900px}}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.inset-x-0{left:0;right:0}.bottom-0{bottom:0}.left-2{left:.5rem}.left-4{left:1rem}.right-0{right:0}.top-0{top:0}.top-1\/2{top:50%}.top-2{top:.5rem}.z-10{z-index:10}.z-20{z-index:20}.z-30{z-index:30}.z-40{z-index:40}.col-span-full{grid-column:1/-1}.m-0{margin:0}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-2{margin-bottom:.5rem}.mb-2\.5{margin-bottom:.625rem}.mb-3{margin-bottom:.75rem}.mb-3\.5{margin-bottom:.875rem}.mb-4{margin-bottom:1rem}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.table{display:table}.grid{display:grid}.hidden{display:none}.aspect-\[4\/3\]{aspect-ratio:4/3}.aspect-square{aspect-ratio:1/1}.h-1{height:.25rem}.h-10{height:2.5rem}.h-\[34px\]{height:34px}.h-full{height:100%}.max-h-\[80vh\]{max-height:80vh}.min-h-screen{min-height:100vh}.w-10{width:2.5rem}.w-24{width:6rem}.w-9{width:2.25rem}.w-\[34px\]{width:34px}.w-full{width:100%}.min-w-0{min-width:0}.max-w-\[1280px\]{max-width:1280px}.max-w-\[680px\]{max-width:680px}.max-w-full{max-width:100%}.flex-1{flex:1 1 0%}.flex-none{flex:none}.border-collapse{border-collapse:collapse}.-translate-y-1\/2{--tw-translate-y:-50%}.-translate-y-1\/2,.translate-y-0{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.translate-y-0{--tw-translate-y:0px}.translate-y-full{--tw-translate-y:100%;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-pointer{cursor:pointer}.grid-cols-\[repeat\(auto-fill\2c minmax\(150px\2c 1fr\)\)\]{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2\.5{gap:.625rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis}.truncate,.whitespace-nowrap{white-space:nowrap}.rounded{border-radius:.25rem}.rounded-\[10px\]{border-radius:10px}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.5rem}.rounded-xl{border-radius:.75rem}.rounded-t-2xl{border-top-left-radius:1rem;border-top-right-radius:1rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-dashed{border-style:dashed}.border-accent{--tw-border-opacity:1;border-color:rgb(31 75 99/var(--tw-border-opacity,1))}.border-line{--tw-border-opacity:1;border-color:rgb(217 218 205/var(--tw-border-opacity,1))}.bg-accent{--tw-bg-opacity:1;background-color:rgb(31 75 99/var(--tw-bg-opacity,1))}.bg-bg{--tw-bg-opacity:1;background-color:rgb(238 240 232/var(--tw-bg-opacity,1))}.bg-black\/40{background-color:rgba(0,0,0,.4)}.bg-line{--tw-bg-opacity:1;background-color:rgb(217 218 205/var(--tw-bg-opacity,1))}.bg-stampaccessory{--tw-bg-opacity:1;background-color:rgb(161 99 29/var(--tw-bg-opacity,1))}.bg-stampbottle{--tw-bg-opacity:1;background-color:rgb(31 75 99/var(--tw-bg-opacity,1))}.bg-surface{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.bg-surface-2{--tw-bg-opacity:1;background-color:rgb(246 246 240/var(--tw-bg-opacity,1))}.object-cover{-o-object-fit:cover;object-fit:cover}.p-2\.5{padding:.625rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.px-1\.5{padding-left:.375rem;padding-right:.375rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-2\.5{padding-left:.625rem;padding-right:.625rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-3\.5{padding-left:.875rem;padding-right:.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-0\.5{padding-top:.125rem;padding-bottom:.125rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-16{padding-top:4rem;padding-bottom:4rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-3\.5{padding-top:.875rem;padding-bottom:.875rem}.pb-1\.5{padding-bottom:.375rem}.pb-10{padding-bottom:2.5rem}.pb-3\.5{padding-bottom:.875rem}.pb-4{padding-bottom:1rem}.pl-11{padding-left:2.75rem}.pr-2{padding-right:.5rem}.pr-4{padding-right:1rem}.pt-2\.5{padding-top:.625rem}.pt-4{padding-top:1rem}.text-center{text-align:center}.align-top{vertical-align:top}.font-body{font-family:system-ui,-apple-system,Segoe UI,PingFang TC,Microsoft JhengHei,sans-serif}.font-display{font-family:Segoe UI,system-ui,-apple-system,sans-serif}.font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.text-\[10px\]{font-size:10px}.text-\[11\.5px\]{font-size:11.5px}.text-\[11px\]{font-size:11px}.text-\[12\.5px\]{font-size:12.5px}.text-\[13\.5px\]{font-size:13.5px}.text-\[13px\]{font-size:13px}.text-\[15px\]{font-size:15px}.text-\[22px\]{font-size:22px}.text-\[24px\]{font-size:24px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xs{font-size:.75rem;line-height:1rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-snug{line-height:1.375}.tracking-\[0\.12em\]{letter-spacing:.12em}.tracking-\[0\.14em\]{letter-spacing:.14em}.tracking-\[0\.1em\]{letter-spacing:.1em}.tracking-tight{letter-spacing:-.025em}.tracking-wide{letter-spacing:.025em}.text-accent{--tw-text-opacity:1;color:rgb(31 75 99/var(--tw-text-opacity,1))}.text-ink{--tw-text-opacity:1;color:rgb(29 36 32/var(--tw-text-opacity,1))}.text-ink-muted{--tw-text-opacity:1;color:rgb(109 115 104/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.shadow-card{--tw-shadow:0 1px 2px rgba(29,36,32,.06),0 10px 28px -14px rgba(29,36,32,.24);--tw-shadow-colored:0 1px 2px var(--tw-shadow-color),0 10px 28px -14px var(--tw-shadow-color)}.shadow-card,.shadow-panel{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-panel{--tw-shadow:-16px 0 40px -20px rgba(0,0,0,.35);--tw-shadow-colored:-16px 0 40px -20px var(--tw-shadow-color)}.shadow-sheet{--tw-shadow:0 -12px 30px -10px rgba(0,0,0,.25);--tw-shadow-colored:0 -12px 30px -10px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.duration-200{transition-duration:.2s}.ease-out{transition-timing-function:cubic-bezier(0,0,.2,1)}.placeholder\:text-ink-muted::-moz-placeholder{--tw-text-opacity:1;color:rgb(109 115 104/var(--tw-text-opacity,1))}.placeholder\:text-ink-muted::placeholder{--tw-text-opacity:1;color:rgb(109 115 104/var(--tw-text-opacity,1))}.hover\:-translate-y-0\.5:hover{--tw-translate-y:-0.125rem;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:border-accent:hover{--tw-border-opacity:1;border-color:rgb(31 75 99/var(--tw-border-opacity,1))}.hover\:bg-accent-soft:hover{--tw-bg-opacity:1;background-color:rgb(220 230 234/var(--tw-bg-opacity,1))}.hover\:text-accent:hover{--tw-text-opacity:1;color:rgb(31 75 99/var(--tw-text-opacity,1))}.hover\:underline:hover{text-decoration-line:underline}.focus\:border-accent:focus{--tw-border-opacity:1;border-color:rgb(31 75 99/var(--tw-border-opacity,1))}.focus\:bg-surface:focus{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.focus-visible\:outline:focus-visible{outline-style:solid}.focus-visible\:outline-2:focus-visible{outline-width:2px}.focus-visible\:outline-offset-2:focus-visible{outline-offset:2px}.focus-visible\:outline-accent:focus-visible{outline-color:#1f4b63}@media (prefers-reduced-motion:reduce){.motion-reduce\:transition-none{transition-property:none}.motion-reduce\:hover\:translate-y-0:hover{--tw-translate-y:0px;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}}@media (min-width:900px){.dt\:static{position:static}.dt\:sticky{position:sticky}.dt\:inset-auto{inset:auto}.dt\:top-\[97px\]{top:97px}.dt\:flex{display:flex}.dt\:hidden{display:none}.dt\:max-h-\[calc\(100vh-97px\)\]{max-height:calc(100vh - 97px)}.dt\:w-\[280px\]{width:280px}.dt\:w-\[440px\]{width:440px}.dt\:flex-none{flex:none}.dt\:translate-y-0{--tw-translate-y:0px;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.dt\:grid-cols-\[repeat\(auto-fill\2c minmax\(190px\2c 1fr\)\)\]{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}.dt\:items-start{align-items:flex-start}.dt\:rounded-none{border-radius:0}.dt\:bg-transparent{background-color:transparent}.dt\:p-6{padding:1.5rem}.dt\:px-6{padding-left:1.5rem;padding-right:1.5rem}.dt\:py-4{padding-top:1rem;padding-bottom:1rem}.dt\:pl-12{padding-left:3rem}.dt\:text-\[26px\]{font-size:26px}.dt\:text-\[28px\]{font-size:28px}.dt\:text-base{font-size:1rem;line-height:1.5rem}.dt\:text-xs{font-size:.75rem;line-height:1rem}.dt\:shadow-none{--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}}</style>
+<style>
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+  /* ---- 新增：載入動畫（Tailwind 精簡版沒有內建 spin 動畫，額外手寫） ---- */
+  .qs-spinner{
+    width:34px;height:34px;border-radius:9999px;
+    border:3px solid rgba(31,75,99,.15);
+    border-top-color:#1f4b63;
+    animation:qs-spin .8s linear infinite;
+  }
+  @keyframes qs-spin{ to{ transform:rotate(360deg); } }
+</style>
+</head>
+<body class="bg-bg text-ink font-body min-h-screen m-0">
+
+<!-- ============ 載入中畫面 ============ -->
+<div id="loading-overlay" class="fixed inset-0 flex items-center justify-center" style="z-index:9999;background:#eef0e8;">
+  <div class="text-center">
+    <div class="qs-spinner mx-auto mb-3"></div>
+    <p class="text-sm text-ink-muted">資料載入中，請稍候…</p>
+  </div>
+</div>
+
+<!-- ============ 錯誤提示列 ============ -->
+<div id="error-banner" class="hidden fixed inset-x-0 top-0 px-4 py-3 flex items-center justify-between gap-3" style="z-index:9999;background:#b3261e;color:#fff;">
+  <span id="error-message" class="flex-1 text-sm"></span>
+  <button id="error-retry" type="button" class="flex-none rounded-lg px-3 py-1.5 text-xs font-semibold" style="border:1px solid rgba(255,255,255,.6);">
+    重新載入
+  </button>
+</div>
+
+<header class="sticky top-0 z-20 bg-surface border-b border-line px-4 dt:px-6 pt-4 pb-4">
+  <div class="flex items-center justify-between gap-4">
+    <div>
+      <span class="block font-mono text-[11px] tracking-[0.14em] text-ink-muted">PRODUCT SPEC CATALOG</span>
+      <h1 class="font-display font-extrabold text-[22px] dt:text-[28px] tracking-tight text-ink m-0">產品規格目錄</h1>
+    </div>
+    <button id="filter-toggle" type="button"
+      class="dt:hidden inline-flex items-center gap-1 rounded-lg border border-accent text-accent font-semibold text-sm px-3.5 py-2 hover:bg-accent-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">
+      篩選
+    </button>
+  </div>
+
+  <div class="flex justify-center mt-4">
+    <div class="relative w-full max-w-[680px]">
+      <span class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-muted">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </span>
+      <input id="search-input" type="text" placeholder="搜尋簡稱、型號、類型、容量、主顏色、外徑、高度…"
+        class="w-full rounded-xl border border-line bg-surface-2 focus:bg-surface focus:border-accent pl-11 dt:pl-12 pr-4 py-3.5 dt:py-4 text-[15px] dt:text-base text-ink placeholder:text-ink-muted outline-none transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" />
+    </div>
+  </div>
+  <p class="text-center mt-2 text-[11px] dt:text-xs text-ink-muted px-2">搜尋範圍：簡稱・產品型號・類型・容量・主顏色・尺寸_外徑・尺寸_高度</p>
+</header>
+
+<div class="max-w-[1280px] mx-auto dt:flex dt:items-start">
+  <aside id="filter-panel"
+    class="fixed dt:static inset-x-0 bottom-0 dt:inset-auto z-30
+           w-full dt:w-[280px] dt:flex-none
+           bg-surface dt:bg-transparent
+           rounded-t-2xl dt:rounded-none
+           shadow-sheet dt:shadow-none
+           translate-y-full dt:translate-y-0
+           transition-transform duration-200 ease-out motion-reduce:transition-none
+           max-h-[80vh] dt:max-h-[calc(100vh-97px)]
+           dt:sticky dt:top-[97px]
+           overflow-y-auto
+           p-5 dt:p-6">
+    <div class="w-9 h-1 rounded-full bg-line mx-auto mb-3 dt:hidden"></div>
+    <div id="filter-groups"></div>
+    <button id="clear-filters" type="button"
+      class="hidden text-accent text-[13px] font-semibold hover:underline mt-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">
+      清除全部篩選
+    </button>
+  </aside>
+
+  <main class="flex-1 min-w-0 p-4 dt:p-6">
+    <div id="series-breadcrumb" class="hidden items-center gap-2 mb-3.5">
+      <button id="series-back" type="button"
+        class="inline-flex items-center gap-1 rounded-lg border border-accent text-accent font-semibold text-sm px-3.5 py-2 hover:bg-accent-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">
+        ← 返回系列
+      </button>
+      <span id="series-breadcrumb-label" class="text-sm text-ink-muted truncate"></span>
+    </div>
+    <div class="flex items-center justify-between mb-3.5 text-sm text-ink-muted">
+      <span id="result-count"></span>
+    </div>
+    <div id="grid" class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))] dt:grid-cols-[repeat(auto-fill,minmax(190px,1fr))]"></div>
+  </main>
+</div>
+
+<div id="backdrop" class="hidden fixed inset-0 bg-black/40 z-30"></div>
+<div id="detail-overlay" class="hidden fixed top-0 right-0 bottom-0 w-full dt:w-[440px] max-w-full bg-surface z-40 shadow-panel overflow-y-auto">
+  <div class="sticky top-0 flex items-center justify-between px-4 py-3.5 bg-surface border-b border-line z-10">
+    <button id="detail-back" type="button"
+      class="hidden w-[34px] h-[34px] rounded-lg bg-surface-2 hover:bg-accent-soft hover:text-accent items-center justify-center text-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">
+      ←
+    </button>
+    <div class="flex-1"></div>
+    <button id="detail-close" type="button"
+      class="w-[34px] h-[34px] rounded-lg bg-surface-2 hover:bg-accent-soft hover:text-accent flex items-center justify-center text-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">
+      ✕
+    </button>
+  </div>
+  <div id="detail-body" class="px-5 pt-4 pb-10"></div>
+</div>
+
+<script>
+// ============================================================
+// ★★★ 請在這裡填入你三個 Google 試算表分頁「發布至網路」後取得的 CSV 網址 ★★★
+// 設定步驟請見對話中的教學說明。三個網址分別對應：
+//   products : 產品資料（所有瓶身＋配件合併在同一個分頁）
+//   series   : 系列圖（系列名稱 → 系列示意圖）
+//   links    : 產品與配件關聯表
+// ============================================================
+const SHEET_URLS = {
+  products: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRyobzl7xsgGlOPlJ9-2jICgvvgzdvZhDzvPB2hQNi_ogdCuB2DeM4x3owVsczjj-Cv-y49UCdPrt2O/pub?gid=1996606623&single=true&output=csv',
+  series:   'https://docs.google.com/spreadsheets/d/e/2PACX-1vRyobzl7xsgGlOPlJ9-2jICgvvgzdvZhDzvPB2hQNi_ogdCuB2DeM4x3owVsczjj-Cv-y49UCdPrt2O/pub?gid=1853839820&single=true&output=csv',
+  links:    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRyobzl7xsgGlOPlJ9-2jICgvvgzdvZhDzvPB2hQNi_ogdCuB2DeM4x3owVsczjj-Cv-y49UCdPrt2O/pub?gid=169257382&single=true&output=csv',
+};
+
+// 這幾種「類型」視為配件（而非瓶身），容量篩選預設不顯示它們的容量，
+// 要點進對應類型後才會出現。如果之後配件表新增其他類型，把它加進這個陣列即可。
+const ACCESSORY_TYPES = ['噴頭', '壓頭', '噴槍'];
+
+// ---------- 執行期資料容器（先給空殼，fetch 完成後才填入） ----------
+const CATALOG = { products: [], links: [] };
+let seriesImages = {};
+let productsById = {};
+let accessoriesByBottle = {};
+
+// ============================================================
+// CSV 解析（不依賴任何外部套件，能處理欄位內含逗號/換行/引號的情況）
+// ============================================================
+function parseCSV(text) {
+  const rows = [];
+  let row = [], field = '', inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQuotes) {
+      if (c === '"') {
+        if (text[i + 1] === '"') { field += '"'; i++; }
+        else inQuotes = false;
+      } else field += c;
+    } else {
+      if (c === '"') inQuotes = true;
+      else if (c === ',') { row.push(field); field = ''; }
+      else if (c === '\r') { /* ignore, \n 會處理換行 */ }
+      else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
+      else field += c;
+    }
+  }
+  if (field.length || row.length) { row.push(field); rows.push(row); }
+  return rows.filter(r => !(r.length === 1 && r[0] === ''));
+}
+function csvToObjects(text) {
+  const cleaned = text.replace(/^\uFEFF/, ''); // 去掉 BOM
+  const rows = parseCSV(cleaned);
+  if (!rows.length) return [];
+  const headers = rows[0].map(h => h.trim());
+  return rows.slice(1)
+    .filter(r => r.some(cell => cell !== undefined && String(cell).trim() !== ''))
+    .map(r => {
+      const obj = {};
+      headers.forEach((h, idx) => { obj[h] = (r[idx] !== undefined ? r[idx] : '').trim(); });
+      return obj;
+    });
+}
+function emptyToNull(v) {
+  if (v === undefined || v === null) return null;
+  const s = String(v).trim();
+  if (s === '' || s.toUpperCase() === 'N/A') return null;
+  return s;
+}
+function toNumber(v) {
+  const s = emptyToNull(v);
+  if (s === null) return null;
+  const n = parseFloat(String(s).replace(/[^0-9.\-]/g, ''));
+  return isNaN(n) ? null : n;
+}
+
+// ---------- Google Drive 分享連結 -> 可直接載入的圖片網址 ----------
+const DRIVE_ID_PATTERNS = [
+  /\/d\/([a-zA-Z0-9_-]{10,})/,        // .../file/d/FILE_ID/view...
+  /[?&]id=([a-zA-Z0-9_-]{10,})/,       // .../open?id=FILE_ID , .../uc?id=FILE_ID
+];
+function resolveDriveImageUrl(url) {
+  if (!url) return null;
+  const u = String(url).trim();
+  if (!u) return null;
+  const isDriveHost = u.includes('drive.google.com') || u.includes('googleusercontent.com');
+  if (!isDriveHost) return u;
+  if (u.includes('drive.google.com/thumbnail') || u.includes('drive.google.com/uc')) return u;
+  for (const pattern of DRIVE_ID_PATTERNS) {
+    const m = u.match(pattern);
+    if (m) return `https://drive.google.com/thumbnail?id=${m[1]}&sz=w1000`;
+  }
+  return u;
+}
+
+// ============================================================
+// CSV 一列 -> 產品物件（欄位名稱對應原本 Excel 表頭，維持一致）
+// ============================================================
+function rowToProduct(r) {
+  const productId = emptyToNull(r['產品型號']);
+  const type = emptyToNull(r['類型']);
+  const capacityRaw = emptyToNull(r['容量']);
+  if (!productId) return null;
+  return {
+    shortName: emptyToNull(r['簡稱']),
+    series: emptyToNull(r['系列']),
+    productId,
+    material: emptyToNull(r['材質']),
+    type,
+    capacityRaw,
+    capacityValue: toNumber(capacityRaw),
+    actualFullCapacity: emptyToNull(r['實際滿容量']),
+    outerDiameterMm: toNumber(r['尺寸_外徑']),
+    heightMm: toNumber(r['尺寸_高度']),
+    mainColor: emptyToNull(r['主顏色']),
+    specification: emptyToNull(r['規格']),
+    shape: emptyToNull(r['造型']),
+    setPrice: toNumber(r['整組價']),
+    bottlePrice: toNumber(r['裸瓶價']),
+    bottleCapPrice: toNumber(r['瓶+蓋價']),
+    threadSize: emptyToNull(r['牙徑']),
+    outerMaterial: emptyToNull(r['外瓶材質']),
+    innerMaterial: emptyToNull(r['內瓶材質']),
+    centerTube: emptyToNull(r['中束']),
+    gasket: emptyToNull(r['墊片']),
+    cap: emptyToNull(r['蓋子']),
+    bottleMoq: toNumber(r['裸瓶MOQ']),
+    processingMoq: toNumber(r['加工MOQ']),
+    supplier: emptyToNull(r['廠商']),
+    stockQty: toNumber(r['庫存數量']),
+    imageUrl: resolveDriveImageUrl(emptyToNull(r['圖片'])),
+    isAccessory: ACCESSORY_TYPES.includes(type),
+  };
+}
+function buildSeriesImageMap(rows) {
+  const map = {};
+  rows.forEach(r => {
+    const series = emptyToNull(r['系列']);
+    if (!series) return;
+    map[series] = resolveDriveImageUrl(emptyToNull(r['圖片']));
+  });
+  return map;
+}
+function buildLinks(rows) {
+  return rows.map((r, idx) => ({
+    id: emptyToNull(r['關聯編號 (ID)']) || `R-${idx + 1}`,
+    bottleId: emptyToNull(r['瓶身編號 (Bottle_ID)']),
+    dispenserId: emptyToNull(r['配件編號 (Dispenser_ID)']),
+    imageUrl: resolveDriveImageUrl(emptyToNull(r['圖片'])),
+    note: emptyToNull(r['備註 (Note)']),
+  })).filter(l => l.bottleId && l.dispenserId);
+}
+function rebuildIndexes() {
+  productsById = {};
+  CATALOG.products.forEach(p => { productsById[p.productId] = p; });
+  accessoriesByBottle = {};
+  CATALOG.links.forEach(link => {
+    const accessory = productsById[link.dispenserId];
+    if (!accessory) return;
+    (accessoriesByBottle[link.bottleId] ||= []).push({ accessory, link });
+  });
+}
+
+// ============================================================
+// 載入中 / 錯誤畫面
+// ============================================================
+function showLoading() { document.getElementById('loading-overlay').classList.remove('hidden'); }
+function hideLoading() { document.getElementById('loading-overlay').classList.add('hidden'); }
+function showError(msg) {
+  document.getElementById('error-message').textContent = msg;
+  document.getElementById('error-banner').classList.remove('hidden');
+}
+function hideError() { document.getElementById('error-banner').classList.add('hidden'); }
+
+async function fetchCsv(url, label) {
+  if (!url || url.indexOf('PASTE_YOUR_') !== -1) {
+    throw new Error(`尚未設定「${label}」的 Google 試算表 CSV 網址，請於程式碼最上方 SHEET_URLS 填入正確網址。`);
+  }
+  let res;
+  try {
+    res = await fetch(url, { cache: 'no-store' });
+  } catch (e) {
+    throw new Error(`「${label}」連線失敗，請確認網路連線是否正常。`);
+  }
+  if (!res.ok) {
+    throw new Error(`「${label}」資料下載失敗（HTTP ${res.status}），請確認試算表已「發布至網路」且網址正確。`);
+  }
+  return await res.text();
+}
+
+async function loadCatalog() {
+  showLoading();
+  hideError();
+  try {
+    const [productsText, seriesText, linksText] = await Promise.all([
+      fetchCsv(SHEET_URLS.products, '產品資料'),
+      fetchCsv(SHEET_URLS.series, '系列圖'),
+      fetchCsv(SHEET_URLS.links, '產品與配件關聯表'),
+    ]);
+    const productRows = csvToObjects(productsText);
+    const seriesRows = csvToObjects(seriesText);
+    const linkRows = csvToObjects(linksText);
+
+    CATALOG.products = productRows.map(rowToProduct).filter(Boolean);
+    CATALOG.links = buildLinks(linkRows);
+    seriesImages = buildSeriesImageMap(seriesRows);
+
+    if (CATALOG.products.length === 0) {
+      throw new Error('已連上試算表，但「產品資料」目前是空的，請確認分頁內容與欄位名稱是否正確。');
+    }
+
+    rebuildIndexes();
+    hideLoading();
+    render();
+  } catch (err) {
+    console.error(err);
+    hideLoading();
+    showError((err && err.message) ? err.message : '資料載入失敗，請檢查網路連線或稍後再試。');
+  }
+}
+
+// ============================================================
+// 篩選狀態
+// ============================================================
+const state = {
+  keyword: '',
+  selected: { type: new Set(), material: new Set(), capacity: new Set(), thread: new Set(), shape: new Set(), color: new Set() },
+  currentSeries: null,
+};
+let detailStack = [];
+
+// requiresType: true 代表這組篩選要等使用者至少選了一個「類型」才會出現
+const FILTER_DEFS = [
+  { key: 'type',     label: '類型', field: 'type' },
+  { key: 'material', label: '材質', field: 'material', requiresType: true },
+  { key: 'capacity', label: '容量', field: 'capacityRaw', numeric: true },
+  { key: 'thread',   label: '牙徑', field: 'threadSize' },
+  { key: 'shape',    label: '造型', field: 'shape' },
+  { key: 'color',    label: '主顏色', field: 'mainColor', requiresType: true },
+];
+
+function browsableProducts() {
+  return CATALOG.products;
+}
+
+function applyExcept(exceptKey) {
+  return browsableProducts().filter(p => {
+    for (const def of FILTER_DEFS) {
+      if (def.key === exceptKey) continue;
+      const sel = state.selected[def.key];
+      if (sel.size && !sel.has(p[def.field])) return false;
+    }
+    if (state.keyword) {
+      const k = state.keyword.toLowerCase();
+      const haystack = [
+        p.shortName, p.productId, p.type, p.capacityRaw, p.mainColor,
+        p.outerDiameterMm, p.heightMm,
+      ].filter(v => v !== null && v !== undefined && v !== '').join(' ').toLowerCase();
+      if (!haystack.includes(k)) return false;
+    }
+    return true;
+  });
+}
+
+function distinctSorted(values, numeric) {
+  const set = [...new Set(values.filter(v => v !== null && v !== undefined))];
+  if (numeric) {
+    set.sort((a, b) => {
+      const na = parseFloat(String(a).replace(/[^0-9.]/g, ''));
+      const nb = parseFloat(String(b).replace(/[^0-9.]/g, ''));
+      if (!isNaN(na) && !isNaN(nb)) return na - nb;
+      return String(a).localeCompare(String(b));
+    });
+  } else {
+    set.sort((a, b) => String(a).localeCompare(String(b)));
+  }
+  return set;
+}
+
+function filteredProducts() { return applyExcept(''); }
+
+// 容量的可選清單有特殊規則：使用者還沒選到「噴頭／壓頭／噴槍」這類配件的類型之前，
+// 配件本身的容量值（例如 0.12、0.25）不會出現在容量篩選清單裡，避免跟瓶身容量混在一起。
+function availableFor(def) {
+  if (def.key === 'capacity') {
+    const typeSel = state.selected.type;
+    const hasAccessoryTypeSelected = [...typeSel].some(t => ACCESSORY_TYPES.includes(t));
+    const pool = applyExcept('capacity').filter(p => !p.isAccessory || hasAccessoryTypeSelected);
+    return distinctSorted(pool.map(p => p.capacityRaw), true);
+  }
+  return distinctSorted(applyExcept(def.key).map(p => p[def.field]), def.numeric);
+}
+function hasActiveFilters() { return FILTER_DEFS.some(def => state.selected[def.key].size > 0); }
+
+function toggleFilter(key, value) {
+  const set = state.selected[key];
+  if (set.has(value)) set.delete(value); else set.add(value);
+  state.currentSeries = null; // 篩選條件變了，回到系列總覽
+  render();
+}
+function clearFilters() {
+  FILTER_DEFS.forEach(def => state.selected[def.key].clear());
+  state.currentSeries = null;
+  render();
+}
+
+// ---------- 格式化 ----------
+function fmtNum(v) {
+  if (v === null || v === undefined) return null;
+  return String(v);
+}
+function fmtPrice(v) {
+  const f = fmtNum(v);
+  return f === null ? null : `NT$${f}`;
+}
+function primaryPrice(p) {
+  if (p.setPrice !== null && p.setPrice !== undefined) return p.setPrice;
+  if (p.bottlePrice !== null && p.bottlePrice !== undefined) return p.bottlePrice;
+  if (p.bottleCapPrice !== null && p.bottleCapPrice !== undefined) return p.bottleCapPrice;
+  return null;
+}
+function specRows(p) {
+  return [
+    ['材質', p.material], ['類型', p.type], ['容量', p.capacityRaw],
+    ['實際滿容量', fmtNum(p.actualFullCapacity)],
+    ['外徑 (mm)', fmtNum(p.outerDiameterMm)], ['高度 (mm)', fmtNum(p.heightMm)],
+    ['主顏色', p.mainColor], ['造型', p.shape], ['牙徑', p.threadSize],
+    ['整組價', fmtPrice(p.setPrice)], ['裸瓶價', fmtPrice(p.bottlePrice)], ['瓶+蓋價', fmtPrice(p.bottleCapPrice)],
+    ['外瓶材質', p.outerMaterial], ['內瓶材質', p.innerMaterial],
+    ['中束', p.centerTube], ['墊片', p.gasket], ['蓋子', p.cap],
+    ['裸瓶MOQ', fmtNum(p.bottleMoq)], ['加工MOQ', fmtNum(p.processingMoq)],
+    ['廠商', p.supplier], ['庫存數量', fmtNum(p.stockQty)],
+  ];
+}
+function accessorySpecRows(p) { return specRows(p).filter(([label]) => label !== '容量'); }
+function categoryLabel(p) { return p.isAccessory ? '配件' : '瓶身'; }
+
+// ---------------------- Render ----------------------
+function render() {
+  renderFilterGroups();
+  renderGrid();
+}
+
+const CHIP_BASE = 'rounded-full border text-[13px] px-3 py-1.5 transition-colors motion-reduce:transition-none cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2';
+function chipClass(isSelected, isAvailable) {
+  if (isSelected) return CHIP_BASE + ' bg-accent border-accent text-white';
+  if (isAvailable) return CHIP_BASE + ' bg-surface border-line text-ink hover:border-accent';
+  return CHIP_BASE + ' bg-surface-2 border-dashed border-line text-ink-muted';
+}
+
+function renderFilterGroups() {
+  const container = document.getElementById('filter-groups');
+  container.innerHTML = '';
+
+  FILTER_DEFS.forEach(def => {
+    // 材質／主顏色：使用者還沒選任何「類型」之前，整組先不出現
+    if (def.requiresType && state.selected.type.size === 0) return;
+
+    const available = availableFor(def);
+    const selected = state.selected[def.key];
+    if (available.length === 0 && selected.size === 0) return;
+
+    const displayOptions = [...new Set([...available, ...selected])].sort((a, b) => {
+      if (def.numeric) {
+        const na = parseFloat(String(a).replace(/[^0-9.]/g, ''));
+        const nb = parseFloat(String(b).replace(/[^0-9.]/g, ''));
+        if (!isNaN(na) && !isNaN(nb)) return na - nb;
+      }
+      return String(a).localeCompare(String(b));
+    });
+
+    const group = document.createElement('div');
+    group.className = 'mb-4';
+
+    const title = document.createElement('p');
+    title.className = 'font-mono text-[11px] tracking-[0.12em] uppercase text-ink-muted mb-1.5';
+    title.textContent = def.label;
+    group.appendChild(title);
+
+    const row = document.createElement('div');
+    row.className = 'flex flex-wrap gap-1.5';
+
+    displayOptions.forEach(option => {
+      const isSelected = selected.has(option);
+      const isAvailable = available.includes(option);
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = chipClass(isSelected, isAvailable);
+      chip.textContent = option;
+      chip.addEventListener('click', () => toggleFilter(def.key, option));
+      row.appendChild(chip);
+    });
+
+    group.appendChild(row);
+    container.appendChild(group);
+  });
+
+  const clearBtn = document.getElementById('clear-filters');
+  clearBtn.classList.toggle('hidden', !hasActiveFilters());
+  clearBtn.classList.toggle('inline-block', hasActiveFilters());
+}
+
+function productImageHtml(url, altText, opts) {
+  const o = opts || {};
+  const cls = o.sizeClass || 'w-full h-full object-cover';
+  const compact = !!o.compact;
+  const missingHtml = compact
+    ? '<span class="text-[10px] text-ink-muted">無圖</span>'
+    : '<span class="font-mono text-[11px] text-ink-muted text-center px-2.5 leading-snug">無圖片</span>';
+  if (!url) return missingHtml;
+  const errorHtml = compact
+    ? '<span class=&quot;text-[10px] text-ink-muted&quot;>無圖</span>'
+    : '<span class=&quot;font-mono text-[11px] text-ink-muted text-center px-2.5 leading-snug&quot;>圖片無法載入<br>（雲端硬碟分享連結非直連）</span>';
+  return `<img src="${escapeAttr(url)}" alt="${escapeAttr(altText)}" class="${cls}" onerror="this.outerHTML='${errorHtml}'">`;
+}
+
+function escapeAttr(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+}
+function escapeHtml(s) {
+  return String(s === null || s === undefined ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+// ---------------------- Grid：系列總覽 ↔ 系列內細項 ↔ 搜尋結果 ----------------------
+function groupBySeries(list) {
+  const map = new Map();
+  list.forEach(p => {
+    const key = p.series || '未分類';
+    if (!map.has(key)) map.set(key, []);
+    map.get(key).push(p);
+  });
+  return map;
+}
+
+function setBreadcrumb(show, label) {
+  const bar = document.getElementById('series-breadcrumb');
+  bar.classList.toggle('hidden', !show);
+  bar.classList.toggle('flex', show);
+  if (show) document.getElementById('series-breadcrumb-label').textContent = label;
+}
+
+function renderGrid() {
+  const grid = document.getElementById('grid');
+  const list = filteredProducts();
+  const searching = state.keyword.length > 0;
+
+  if (searching) {
+    setBreadcrumb(false, '');
+    document.getElementById('result-count').textContent = `共 ${list.length} 筆`;
+    renderProductCards(grid, list);
+    return;
+  }
+
+  if (state.currentSeries) {
+    const seriesList = list.filter(p => (p.series || '未分類') === state.currentSeries);
+    setBreadcrumb(true, `${state.currentSeries}（共 ${seriesList.length} 筆）`);
+    document.getElementById('result-count').textContent = '';
+    if (seriesList.length === 0) {
+      grid.innerHTML = `<div class="col-span-full text-center text-ink-muted text-sm py-16">此系列目前沒有符合篩選條件的產品</div>`;
+      return;
+    }
+    renderProductCards(grid, seriesList);
+    return;
+  }
+
+  setBreadcrumb(false, '');
+  renderSeriesGrid(grid, list);
+}
+
+function renderSeriesGrid(grid, list) {
+  const groups = groupBySeries(list);
+  const seriesNames = [...groups.keys()].sort((a, b) => a.localeCompare(b));
+  document.getElementById('result-count').textContent = `共 ${seriesNames.length} 個系列・${list.length} 筆產品`;
+
+  if (seriesNames.length === 0) {
+    grid.innerHTML = `<div class="col-span-full text-center text-ink-muted text-sm py-16">沒有符合篩選條件的產品</div>`;
+    return;
+  }
+
+  grid.innerHTML = seriesNames.map(name => {
+    const items = groups.get(name);
+    const img = seriesImages[name] || null;
+    return `
+      <article class="series-card bg-surface border border-line rounded-[10px] overflow-hidden cursor-pointer shadow-card hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 transition-transform" data-series="${escapeAttr(name)}">
+        <div class="relative aspect-square bg-surface-2 flex items-center justify-center">
+          ${productImageHtml(img, name)}
+        </div>
+        <div class="px-3 pt-2.5 pb-3.5 text-center">
+          <h3 class="text-[15px] dt:text-base font-semibold truncate">${escapeHtml(name)}</h3>
+          <p class="text-[12.5px] text-ink-muted m-0">共 ${items.length} 項</p>
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  grid.querySelectorAll('.series-card').forEach(card => {
+    card.addEventListener('click', () => {
+      state.currentSeries = card.dataset.series;
+      render();
+    });
+  });
+}
+
+// 產品卡片：簡稱、主顏色、容量、價格（系列圖卡片不會用到這個函式）
+function renderProductCards(grid, list) {
+  if (list.length === 0) {
+    grid.innerHTML = `<div class="col-span-full text-center text-ink-muted text-sm py-16">沒有符合篩選條件的產品</div>`;
+    return;
+  }
+
+  grid.innerHTML = list.map(p => {
+    const price = fmtPrice(primaryPrice(p));
+    return `
+    <article class="card bg-surface border border-line rounded-[10px] overflow-hidden cursor-pointer shadow-card hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 transition-transform" data-id="${escapeAttr(p.productId)}">
+      <div class="relative aspect-square bg-surface-2 flex items-center justify-center">
+        <span class="absolute top-2 left-2 z-10 font-mono text-[10px] tracking-wide px-1.5 py-0.5 rounded text-white ${p.isAccessory ? 'bg-stampaccessory' : 'bg-stampbottle'}">${categoryLabel(p)}</span>
+        ${productImageHtml(p.imageUrl, p.shortName || p.productId)}
+      </div>
+      <div class="px-3 pt-2.5 pb-3.5">
+        <p class="font-mono text-xs text-ink-muted m-0">${escapeHtml(p.productId)}</p>
+        <h3 class="text-[15px] dt:text-base font-semibold mt-0.5 mb-1 truncate">${escapeHtml(p.shortName || p.productId)}</h3>
+        <p class="text-[12.5px] text-ink-muted m-0 truncate">${escapeHtml(p.mainColor || '—')}</p>
+        <p class="text-[12.5px] text-ink-muted m-0 truncate">${escapeHtml(p.capacityRaw ? p.capacityRaw + ' mL' : '—')}</p>
+        <p class="text-[13px] text-accent font-semibold mt-0.5 m-0 truncate">${escapeHtml(price || '—')}</p>
+      </div>
+    </article>
+  `;
+  }).join('');
+
+  grid.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => openDetail(card.dataset.id));
+  });
+}
+
+// ---------------------- Detail overlay ----------------------
+function openDetail(id, extra) {
+  detailStack.push({
+    id,
+    comboImageUrl: extra && extra.comboImageUrl ? extra.comboImageUrl : null,
+    comboWithLabel: extra && extra.comboWithLabel ? extra.comboWithLabel : null,
+  });
+  renderDetail();
+  document.getElementById('backdrop').classList.remove('hidden');
+  document.getElementById('detail-overlay').classList.remove('hidden');
+}
+function closeDetail() {
+  detailStack = [];
+  document.getElementById('backdrop').classList.add('hidden');
+  document.getElementById('detail-overlay').classList.add('hidden');
+}
+function backDetail() {
+  detailStack.pop();
+  if (detailStack.length === 0) { closeDetail(); return; }
+  renderDetail();
+}
+
+function renderDetail() {
+  const entry = detailStack[detailStack.length - 1];
+  const id = entry.id;
+  const p = productsById[id];
+  const body = document.getElementById('detail-body');
+  const backBtn = document.getElementById('detail-back');
+  backBtn.classList.toggle('hidden', detailStack.length <= 1);
+  backBtn.classList.toggle('flex', detailStack.length > 1);
+
+  if (!p) {
+    body.innerHTML = `<p class="text-[13px] text-ink-muted">找不到這個產品，可能已從資料庫移除。</p>`;
+    return;
+  }
+
+  const rows = p.isAccessory ? accessorySpecRows(p) : specRows(p);
+  const rowsHtml = rows
+    .filter(([, value]) => value !== null && value !== undefined && String(value).trim() !== '')
+    .map(([label, value]) => `
+      <tr class="border-b border-line align-top">
+        <td class="w-24 pt-2.5 pb-1.5 pr-2 font-mono text-[11.5px] tracking-wide text-ink-muted align-top whitespace-nowrap">${escapeHtml(label)}</td>
+        <td class="py-1.5 text-[13.5px] text-ink align-top">${escapeHtml(value)}</td>
+      </tr>
+    `).join('');
+
+  let accessoriesHtml = '';
+  if (!p.isAccessory) {
+    const pairs = accessoriesByBottle[p.productId] || [];
+    const itemsHtml = pairs.length === 0
+      ? `<p class="text-[13px] text-ink-muted">目前沒有設定可搭配的配件（可在「產品與配件關聯表」新增一列）</p>`
+      : pairs.map(({ accessory, link }) => {
+          const meta = [accessory.type, accessory.threadSize ? `牙徑 ${accessory.threadSize}` : null, accessory.mainColor]
+            .filter(Boolean).join(' · ');
+          const thumbUrl = link.imageUrl || accessory.imageUrl;
+          return `
+            <div class="accessory-item flex items-center gap-2.5 p-2.5 border border-line rounded-lg mb-2 cursor-pointer hover:border-accent"
+                 data-id="${escapeAttr(accessory.productId)}"
+                 data-combo-image="${escapeAttr(link.imageUrl || '')}"
+                 data-combo-label="${escapeAttr(p.shortName || p.productId)}">
+              <div class="w-10 h-10 rounded-full bg-surface-2 flex items-center justify-center overflow-hidden flex-none text-[10px] text-ink-muted">${productImageHtml(thumbUrl, accessory.shortName || accessory.productId, {compact: true, sizeClass: 'w-full h-full object-cover'})}</div>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold m-0 truncate">${escapeHtml(accessory.shortName || accessory.productId)}</p>
+                <p class="text-xs text-ink-muted mt-0.5 truncate">${escapeHtml(meta)}</p>
+              </div>
+            </div>
+          `;
+        }).join('');
+    accessoriesHtml = `
+      <h4 class="font-display font-bold text-lg mt-6 mb-2.5">可搭配的配件</h4>
+      ${itemsHtml}
+    `;
+  }
+
+  const comboHtml = entry.comboImageUrl ? `
+    <h4 class="font-display font-bold text-lg mt-6 mb-2.5">${entry.comboWithLabel ? `與 ${escapeHtml(entry.comboWithLabel)} 的搭配示意圖` : '搭配示意圖'}</h4>
+    <div class="w-full aspect-[4/3] rounded-[10px] overflow-hidden bg-surface-2 flex items-center justify-center">
+      ${productImageHtml(entry.comboImageUrl, entry.comboWithLabel || '搭配示意圖')}
+    </div>
+  ` : '';
+
+  body.innerHTML = `
+    <div class="w-full aspect-[4/3] rounded-[10px] overflow-hidden bg-surface-2 flex items-center justify-center mb-4">
+      ${productImageHtml(p.imageUrl, p.shortName || p.productId)}
+    </div>
+    <span class="font-mono text-[11px] tracking-[0.1em] text-ink-muted">${escapeHtml(categoryLabel(p))} · ${escapeHtml(p.series || p.type || '')}</span>
+    <h2 class="font-display font-extrabold text-[24px] dt:text-[26px] mt-0.5 mb-1">${escapeHtml(p.shortName || p.productId)}</h2>
+    <p class="font-mono text-xs text-ink-muted mb-3.5">${escapeHtml(p.productId)}</p>
+    <table class="w-full border-collapse"><tbody>${rowsHtml}</tbody></table>
+    ${comboHtml}
+    ${accessoriesHtml}
+  `;
+
+  body.querySelectorAll('.accessory-item').forEach(el => {
+    el.addEventListener('click', () => openDetail(el.dataset.id, {
+      comboImageUrl: el.dataset.comboImage || null,
+      comboWithLabel: el.dataset.comboLabel || null,
+    }));
+  });
+}
+
+// ---------------------- Wiring ----------------------
+document.getElementById('search-input').addEventListener('input', e => {
+  state.keyword = e.target.value.trim();
+  render();
+});
+document.getElementById('clear-filters').addEventListener('click', clearFilters);
+document.getElementById('detail-close').addEventListener('click', closeDetail);
+document.getElementById('detail-back').addEventListener('click', backDetail);
+document.getElementById('backdrop').addEventListener('click', closeDetail);
+document.getElementById('series-back').addEventListener('click', () => {
+  state.currentSeries = null;
+  render();
+});
+document.getElementById('error-retry').addEventListener('click', loadCatalog);
+
+const filterPanel = document.getElementById('filter-panel');
+document.getElementById('filter-toggle').addEventListener('click', () => {
+  filterPanel.classList.toggle('translate-y-full');
+  filterPanel.classList.toggle('translate-y-0');
+});
+
+// ---------------------- 啟動：改成從 Google 試算表抓資料 ----------------------
+loadCatalog();
+</script>
+</body>
+</html>
