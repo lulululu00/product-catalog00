@@ -43,10 +43,6 @@
       <span class="block font-mono text-[11px] tracking-[0.14em] text-ink-muted">PRODUCT SPEC CATALOG</span>
       <h1 class="font-display font-extrabold text-[22px] dt:text-[28px] tracking-tight text-ink m-0">產品規格目錄</h1>
     </div>
-    <button id="filter-toggle" type="button"
-      class="dt:hidden inline-flex items-center gap-1 rounded-lg border border-accent text-accent font-semibold text-sm px-3.5 py-2 hover:bg-accent-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">
-      篩選
-    </button>
   </div>
 
   <div class="flex justify-center mt-4">
@@ -66,18 +62,16 @@
 
 <div class="max-w-[1280px] mx-auto dt:flex dt:items-start">
   <aside id="filter-panel"
-    class="fixed dt:static inset-x-0 bottom-0 dt:inset-auto z-30
-           w-full dt:w-[280px] dt:flex-none
+    class="w-full dt:w-[280px] dt:flex-none
            bg-surface dt:bg-transparent
-           rounded-t-2xl dt:rounded-none
-           shadow-sheet dt:shadow-none
-           translate-y-full dt:translate-y-0
-           transition-transform duration-200 ease-out motion-reduce:transition-none
-           max-h-[80vh] dt:max-h-[calc(100vh-97px)]
+           border border-line dt:border-0
+           rounded-xl dt:rounded-none
+           shadow-card dt:shadow-none
            dt:sticky dt:top-[97px]
-           overflow-y-auto
-           p-5 dt:p-6">
-    <div class="w-9 h-1 rounded-full bg-line mx-auto mb-3 dt:hidden"></div>
+           dt:max-h-[calc(100vh-97px)]
+           dt:overflow-y-auto
+           mb-4 dt:mb-0
+           p-4 dt:p-6">
     <div id="filter-groups"></div>
     <button id="clear-filters" type="button"
       class="hidden text-accent text-[13px] font-semibold hover:underline mt-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">
@@ -764,12 +758,6 @@ document.getElementById('series-back').addEventListener('click', () => {
   render();
 });
 document.getElementById('error-retry').addEventListener('click', loadCatalog);
-
-const filterPanel = document.getElementById('filter-panel');
-document.getElementById('filter-toggle').addEventListener('click', () => {
-  filterPanel.classList.toggle('translate-y-full');
-  filterPanel.classList.toggle('translate-y-0');
-});
 
 // ---------------------- 啟動：改成從 Google 試算表抓資料 ----------------------
 loadCatalog();
