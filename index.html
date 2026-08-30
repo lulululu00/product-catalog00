@@ -762,5 +762,54 @@ document.getElementById('error-retry').addEventListener('click', loadCatalog);
 // ---------------------- 啟動：改成從 Google 試算表抓資料 ----------------------
 loadCatalog();
 </script>
+  <!-- 簡單免費 Gemini 聊天小工具 -->
+<div id="ai-chat-box" style="position:fixed; bottom:20px; right:20px; z-index:9999;">
+  <button id="toggle-chat" style="padding:10px 15px; background:#4285f4; color:white; border:none; border-radius:20px; cursor:pointer;">💬 客服諮詢</button>
+  <div id="chat-window" style="display:none; width:300px; height:400px; background:white; border:1px solid #ccc; border-radius:10px; flex-direction:column; padding:10px; margin-bottom:10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <div id="chat-messages" style="flex:1; overflow-y:auto; font-size:14px; display:flex; flex-direction:column; gap:8px;"></div>
+    <div style="display:flex; gap:5px; margin-top:10px;">
+      <input type="text" id="user-input" placeholder="請問問題..." style="flex:1; padding:5px; border:1px solid #ccc; border-radius:4px;">
+      <button id="send-btn" style="padding:5px 10px; background:#4285f4; color:white; border:none; border-radius:4px;">發送</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const GEMINI_API_KEY = "AQ.Ab8RN6LrKpQGU_kj9b8AjzpE68INzsj0dfIgQDHXV29G5sPyTA"; // ⚠️ 貼上剛剛申請的 Key
+  
+  const toggleBtn = document.getElementById('toggle-chat');
+  const chatWindow = document.getElementById('chat-window');
+  const sendBtn = document.getElementById('send-btn');
+  const userInput = document.getElementById('user-input');
+  const chatMessages = document.getElementById('chat-messages');
+
+  toggleBtn.onclick = () => {
+    chatWindow.style.display = chatWindow.style.display === 'none' ? 'flex' : 'none';
+  };
+
+  sendBtn.onclick = async () => {
+    const text = userInput.value.trim();
+    if (!text) return;
+    
+    // 顯示使用者訊息
+    chatMessages.innerHTML += `<div style="align-self:flex-end; background:#e3f2fd; padding:6px 10px; border-radius:10px;">${text}</div>`;
+    userInput.value = '';
+
+    // 呼叫 Google 官方 Gemini 免費 API
+    try {
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ contents: [{ parts: [{ text: text }] }] })
+      });
+      const data = await res.json();
+      const reply = data.candidates[0].content.parts[0].text;
+      chatMessages.innerHTML += `<div style="align-self:flex-start; background:#f1f3f4; padding:6px 10px; border-radius:10px;">${reply}</div>`;
+    } catch (e) {
+      chatMessages.innerHTML += `<div style="color:red;">發送失敗，請重試</div>`;
+    }
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  };
+</script>
 </body>
 </html>
