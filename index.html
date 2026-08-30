@@ -797,11 +797,30 @@ loadCatalog();
 
     // 呼叫 Google 官方 Gemini 免費 API
     try {
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ contents: [{ parts: [{ text: text }] }] })
-      });
+     // 替換原有的 fetch 段落
+const res = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    contents: [{
+      parts: [{ text: text }]
+    }]
+  })
+});
+
+const data = await res.json();
+
+// 如果 API 回傳錯誤訊息，印出詳細原因
+if (data.error) {
+  console.error("Gemini API Error:", data.error);
+  chatMessages.innerHTML += `<div style="color:red;">API 錯誤：${data.error.message}</div>`;
+  return;
+}
+
+const reply = data.candidates[0].content.parts[0].text;
+chatMessages.innerHTML += `<div style="align-self:flex-start; background:#f1f3f4; padding:6px 10px; border-radius:10px;">${reply}</div>`;
       const data = await res.json();
       const reply = data.candidates[0].content.parts[0].text;
       chatMessages.innerHTML += `<div style="align-self:flex-start; background:#f1f3f4; padding:6px 10px; border-radius:10px;">${reply}</div>`;
