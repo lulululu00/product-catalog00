@@ -93,7 +93,11 @@
         </svg>
       </span>
       <input id="search-input" type="text" placeholder="搜尋簡稱、型號、類型、容量、主顏色、外徑、高度…"
-        class="w-full rounded-xl border border-line bg-surface-2 focus:bg-surface focus:border-accent pl-11 dt:pl-12 pr-4 py-3.5 dt:py-4 text-[15px] dt:text-base text-ink placeholder:text-ink-muted outline-none transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" />
+        class="w-full rounded-xl border border-line bg-surface-2 focus:bg-surface focus:border-accent pl-11 dt:pl-12 pr-11 py-3.5 dt:py-4 text-[15px] dt:text-base text-ink placeholder:text-ink-muted outline-none transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" />
+      <button id="search-clear" type="button" aria-label="清除搜尋"
+        class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-line hover:bg-accent-soft text-ink-muted hover:text-accent items-center justify-center text-xs focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">
+        ✕
+      </button>
     </div>
   </div>
   <p class="text-center mt-2 text-[11px] dt:text-xs text-ink-muted px-2">搜尋範圍：簡稱・產品型號・類型・容量・主顏色・尺寸_外徑・尺寸_高度・關聯組合資訊</p>
@@ -971,8 +975,25 @@ document.getElementById('lightbox-close').addEventListener('click', closeLightbo
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
 // ---------------------- Wiring ----------------------
-document.getElementById('search-input').addEventListener('input', e => {
+const searchInputEl = document.getElementById('search-input');
+const searchClearEl = document.getElementById('search-clear');
+
+function updateSearchClearVisibility() {
+  const hasText = searchInputEl.value.length > 0;
+  searchClearEl.classList.toggle('hidden', !hasText);
+  searchClearEl.classList.toggle('flex', hasText);
+}
+
+searchInputEl.addEventListener('input', e => {
   state.keyword = e.target.value.trim();
+  updateSearchClearVisibility();
+  render();
+});
+searchClearEl.addEventListener('click', () => {
+  searchInputEl.value = '';
+  state.keyword = '';
+  updateSearchClearVisibility();
+  searchInputEl.focus();
   render();
 });
 document.getElementById('clear-filters').addEventListener('click', clearFilters);
