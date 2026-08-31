@@ -672,10 +672,7 @@ function comboCardHtml(combo) {
   return `
     <article class="combo-card bg-surface border border-line rounded-[10px] overflow-hidden cursor-pointer shadow-card hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 transition-transform"
       data-primary-id="${escapeAttr(primary.productId)}"
-      data-combo-image="${escapeAttr(link.imageUrl || '')}"
-      data-combo-label="${escapeAttr(bottle.shortName || bottle.productId)}"
-      data-combo-link="${escapeAttr(link.id || '')}"
-      data-combo-cap="${escapeAttr(capProduct ? capProduct.productId : '')}">
+      data-combo-link="${escapeAttr(link.id || '')}">
       <div class="relative aspect-square bg-surface-2 flex items-center justify-center">
         <span class="absolute top-2 left-2 z-10 font-mono text-[10px] tracking-wide px-1.5 py-0.5 rounded text-white bg-stampaccessory">組合</span>
         ${productImageHtml(link.imageUrl, label, {compact: true})}
@@ -711,10 +708,7 @@ function renderComboSection(matchedProducts) {
   container.querySelectorAll('.combo-card').forEach(el => {
     el.addEventListener('click', () => {
       openDetail(el.dataset.primaryId, {
-        comboImageUrl: el.dataset.comboImage || null,
-        comboWithLabel: el.dataset.comboLabel || null,
         comboLink: el.dataset.comboLink || null,
-        comboCapId: el.dataset.comboCap || null,
       });
     });
   });
@@ -783,12 +777,11 @@ function renderProductCards(grid, list) {
 }
 
 function openDetail(id, extra) {
+  // extra 只需要帶 comboLink（關聯表的關聯編號）—— 瓶身／配件／蓋子／組合圖／
+  // 整組價／MOQ 全部從這筆關聯資料本身查出來，不用另外傳一堆容易對不上的欄位。
   detailStack.push({
     id,
-    comboImageUrl: extra && extra.comboImageUrl ? extra.comboImageUrl : null,
-    comboWithLabel: extra && extra.comboWithLabel ? extra.comboWithLabel : null,
     comboLink: extra && extra.comboLink ? extra.comboLink : null,
-    comboCapId: extra && extra.comboCapId ? extra.comboCapId : null,
   });
   renderDetail();
   document.getElementById('backdrop').classList.remove('hidden');
@@ -847,6 +840,30 @@ function comboInfoCardHtml(role, product) {
   `;
 }
 
+// 整組資訊卡：這筆關聯表資料本身的整組價／各項 MOQ（不是任何單一產品的欄位，
+// 是「產品與配件關聯表」那一列自己的欄位，所以獨立一張卡片顯示）。
+// 整組價一樣受 $$ 顯示價格開關保護；MOQ 不算敏感價格資訊，一律顯示。
+function comboOverallInfoHtml(link) {
+  if (!link) return '';
+  const hasSetPrice = link.setPrice !== null && link.setPrice !== undefined;
+  const moqParts = [
+    link.bottleMoq != null ? `瓶身 ${fmtNum(link.bottleMoq)}` : null,
+    link.capMoq != null ? `蓋子 ${fmtNum(link.capMoq)}` : null,
+    link.dispenserMoq != null ? `壓頭 ${fmtNum(link.dispenserMoq)}` : null,
+  ].filter(Boolean);
+  if (!hasSetPrice && moqParts.length === 0) return '';
+  const priceLine = pricesRevealed
+    ? (hasSetPrice ? fmtPrice(link.setPrice) : '未設定')
+    : '點上方「$$ 顯示價格」查看';
+  return `
+    <div class="combo-info-card">
+      <p class="combo-info-role">整組資訊 SET</p>
+      <p class="combo-info-line">整組價：${escapeHtml(priceLine)}</p>
+      ${moqParts.length ? `<p class="combo-info-line">MOQ：${escapeHtml(moqParts.join(' · '))}</p>` : ''}
+    </div>
+  `;
+}
+
 function renderDetail() {
   const entry = detailStack[detailStack.length - 1];
   const id = entry.id;
@@ -878,10 +895,7 @@ function renderDetail() {
           return `
             <div class="accessory-item flex items-center gap-2.5 p-2.5 border border-line rounded-lg mb-2 cursor-pointer hover:border-accent"
                  data-id="${escapeAttr(primary ? primary.productId : '')}"
-                 data-combo-image="${escapeAttr(link.imageUrl || '')}"
-                 data-combo-label="${escapeAttr(p.shortName || p.productId)}"
-                 data-combo-link="${escapeAttr(link.id || '')}"
-                 data-combo-cap="${escapeAttr(capProduct ? capProduct.productId : '')}">
+                 data-combo-link="${escapeAttr(link.id || '')}">
               <div class="w-10 h-10 rounded-full bg-surface-2 flex items-center justify-center overflow-hidden flex-none text-[10px] text-ink-muted">${productImageHtml(thumbUrl, (primary && (primary.shortName || primary.productId)) || '組合', {compact: true})}</div>
               <div class="min-w-0">
                 <p class="text-sm font-semibold m-0 truncate">${escapeHtml(primary ? (primary.shortName || primary.productId) : '（未指定配件）')}</p>
@@ -896,22 +910,30 @@ function renderDetail() {
     `;
   }
 
-  const comboHtml = entry.comboImageUrl ? `
-    <h4 class="font-display font-bold text-lg mt-6 mb-2.5">${entry.comboWithLabel ? `與 ${escapeHtml(entry.comboWithLabel)} 的搭配示意圖` : '搭配示意圖'}</h4>
+  // 組合示意圖／組合資訊：一律直接從關聯表那一列（entry.comboLink 對應的 link 物件）
+  // 查瓶身／配件／蓋子分別是誰，不再用簡稱去反推——簡稱可能重複（例如同一個瓶身
+  // 好幾種顏色都叫同一個簡稱），用簡稱反推會抓錯到別的品項。
+  const linkObj = entry.comboLink ? (CATALOG.links.find(l => l.id === entry.comboLink) || null) : null;
+  const comboBottle = linkObj ? productsById[linkObj.bottleId] : null;
+  const comboAccessory = linkObj && linkObj.dispenserId ? productsById[linkObj.dispenserId] : null;
+  const comboCap = linkObj && linkObj.capId ? productsById[linkObj.capId] : null;
+
+  const comboHtml = (linkObj && linkObj.imageUrl) ? `
+    <h4 class="font-display font-bold text-lg mt-6 mb-2.5">${comboBottle ? `與 ${escapeHtml(comboBottle.shortName || comboBottle.productId)} 的搭配示意圖` : '搭配示意圖'}</h4>
     <div class="w-full aspect-[4/3] rounded-[10px] overflow-hidden bg-surface-2 flex items-center justify-center">
-      ${productImageHtml(entry.comboImageUrl, entry.comboWithLabel || '搭配示意圖')}
+      ${productImageHtml(linkObj.imageUrl, (comboBottle && (comboBottle.shortName || comboBottle.productId)) || '搭配示意圖')}
     </div>
   ` : '';
 
-  // 組合資訊：瓶身／配件／蓋子 各自的尺寸、價格、廠商摘要（只有透過搭配清單點進來才有）
+  // 組合資訊：瓶身／配件／蓋子各自的尺寸、價格、廠商，加上這組關聯本身的整組價／MOQ
+  // （只有透過「可搭配的配件」清單或搜尋結果的「相關組合」點進來才有 linkObj）。
   let comboInfoHtml = '';
-  if (entry.comboLink) {
-    const bottleForCombo = !p.isAccessory ? p : (entry.comboWithLabel ? Object.values(productsById).find(x => (x.shortName || x.productId) === entry.comboWithLabel) : null);
-    const capForCombo = entry.comboCapId ? productsById[entry.comboCapId] : null;
+  if (linkObj) {
     const parts = [
-      comboInfoCardHtml('瓶身 BOTTLE', bottleForCombo),
-      comboInfoCardHtml('配件（壓頭／噴頭／噴槍） ACCESSORY', p.isAccessory ? p : null),
-      comboInfoCardHtml('蓋子 CAP', capForCombo),
+      comboOverallInfoHtml(linkObj),
+      comboInfoCardHtml('瓶身 BOTTLE', comboBottle),
+      comboInfoCardHtml('配件（壓頭／噴頭／噴槍） ACCESSORY', comboAccessory),
+      comboInfoCardHtml('蓋子 CAP', comboCap),
     ].filter(Boolean).join('');
     if (parts) {
       comboInfoHtml = `<h4 class="font-display font-bold text-lg mt-6 mb-2.5">組合資訊</h4>${parts}`;
@@ -944,10 +966,7 @@ function renderDetail() {
 
   body.querySelectorAll('.accessory-item').forEach(el => {
     el.addEventListener('click', () => openDetail(el.dataset.id, {
-      comboImageUrl: el.dataset.comboImage || null,
-      comboWithLabel: el.dataset.comboLabel || null,
       comboLink: el.dataset.comboLink || null,
-      comboCapId: el.dataset.comboCap || null,
     }));
   });
 }
