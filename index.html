@@ -130,6 +130,7 @@
       <span id="result-count"></span>
     </div>
     <div id="grid" class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))] dt:grid-cols-[repeat(auto-fill,minmax(190px,1fr))]"></div>
+    <div id="combo-section" class="hidden"></div>
   </main>
 </div>
 
@@ -613,8 +614,12 @@ function renderGrid() {
     setBreadcrumb(false, '');
     document.getElementById('result-count').textContent = `共 ${list.length} 筆`;
     renderProductCards(grid, list);
+    renderComboSection(list);
     return;
   }
+
+  // 不是在搜尋狀態（瀏覽系列列表／系列內清單）時，組合卡片區塊收起來，只在搜尋結果裡出現。
+  clearComboSection();
 
   if (state.currentSeries) {
     const seriesList = list.filter(p => (p.series || '未分類') === state.currentSeries);
@@ -630,6 +635,85 @@ function renderGrid() {
 
   setBreadcrumb(false, '');
   renderSeriesGrid(grid, list);
+}
+
+// 從目前的搜尋結果裡，找出這些瓶身底下「有設定組合示意圖」的搭配關係，
+// 讓組合照本身也能在搜尋結果直接被看到、點進去，不用先點瓶身、再點配件清單。
+// 需求脈絡：使用者搜「150」只會用產品型號/簡稱比對到瓶身本身，
+// 但組合照是掛在「產品與配件關聯表」那一列上的，不會因為關聯編號本身包含 150 而被找到
+// （事實上關聯編號本來就是照建置順序編的，本來就不該拿來對應搜尋字串）。
+// 這裡改成直接看「目前搜尋比對到的瓶身，各自掛了哪些組合」，不管關聯編號長什麼樣都找得到。
+function collectMatchingCombos(matchedProducts) {
+  const seen = new Set();
+  const combos = [];
+  matchedProducts.forEach(bottle => {
+    if (bottle.isAccessory) return;
+    const pairs = accessoriesByBottle[bottle.productId] || [];
+    pairs.forEach(({ accessory, capProduct, link }) => {
+      if (!link.imageUrl) return; // 只有真的有設定組合示意圖的搭配才值得額外秀出來
+      const key = link.id || `${bottle.productId}|${accessory ? accessory.productId : ''}|${capProduct ? capProduct.productId : ''}`;
+      if (seen.has(key)) return;
+      seen.add(key);
+      combos.push({ bottle, accessory, capProduct, link });
+    });
+  });
+  return combos;
+}
+
+function comboCardHtml(combo) {
+  const { bottle, accessory, capProduct, link } = combo;
+  const label = [bottle, accessory, capProduct].filter(Boolean)
+    .map(p => p.shortName || p.productId).join(' + ');
+  const primary = accessory || capProduct || bottle;
+  return `
+    <article class="combo-card bg-surface border border-line rounded-[10px] overflow-hidden cursor-pointer shadow-card hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 transition-transform"
+      data-primary-id="${escapeAttr(primary.productId)}"
+      data-combo-image="${escapeAttr(link.imageUrl || '')}"
+      data-combo-label="${escapeAttr(bottle.shortName || bottle.productId)}"
+      data-combo-link="${escapeAttr(link.id || '')}"
+      data-combo-cap="${escapeAttr(capProduct ? capProduct.productId : '')}">
+      <div class="relative aspect-square bg-surface-2 flex items-center justify-center">
+        <span class="absolute top-2 left-2 z-10 font-mono text-[10px] tracking-wide px-1.5 py-0.5 rounded text-white bg-stampaccessory">組合</span>
+        ${productImageHtml(link.imageUrl, label, {compact: true})}
+      </div>
+      <div class="px-3 pt-2.5 pb-3.5">
+        <p class="font-mono text-xs text-ink-muted m-0 truncate">${escapeHtml(link.id || '')}</p>
+        <h3 class="text-[15px] dt:text-base font-semibold mt-0.5 mb-1 truncate">${escapeHtml(label)}</h3>
+      </div>
+    </article>
+  `;
+}
+
+function clearComboSection() {
+  const container = document.getElementById('combo-section');
+  container.innerHTML = '';
+  container.classList.add('hidden');
+}
+
+function renderComboSection(matchedProducts) {
+  const container = document.getElementById('combo-section');
+  const combos = collectMatchingCombos(matchedProducts);
+  if (combos.length === 0) {
+    clearComboSection();
+    return;
+  }
+  container.classList.remove('hidden');
+  container.innerHTML = `
+    <h3 class="font-display font-bold text-lg mt-6 mb-3">相關組合</h3>
+    <div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))] dt:grid-cols-[repeat(auto-fill,minmax(190px,1fr))]">
+      ${combos.map(comboCardHtml).join('')}
+    </div>
+  `;
+  container.querySelectorAll('.combo-card').forEach(el => {
+    el.addEventListener('click', () => {
+      openDetail(el.dataset.primaryId, {
+        comboImageUrl: el.dataset.comboImage || null,
+        comboWithLabel: el.dataset.comboLabel || null,
+        comboLink: el.dataset.comboLink || null,
+        comboCapId: el.dataset.comboCap || null,
+      });
+    });
+  });
 }
 
 function renderSeriesGrid(grid, list) {
