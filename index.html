@@ -9,7 +9,6 @@
   @media (prefers-reduced-motion: reduce){
     *{animation:none !important;transition:none !important;}
   }
-  /* ---- 新增：載入動畫（Tailwind 精簡版沒有內建 spin 動畫，額外手寫） ---- */
   .qs-spinner{
     width:34px;height:34px;border-radius:9999px;
     border:3px solid rgba(31,75,99,.15);
@@ -18,7 +17,6 @@
   }
   @keyframes qs-spin{ to{ transform:rotate(360deg); } }
 
-  /* ---- 新增：Gemini AI 小幫手 ---- */
   .ai-fab{
     position:fixed; right:1rem; bottom:1rem; z-index:9998;
     width:52px; height:52px; border-radius:9999px;
@@ -76,11 +74,52 @@
   @media (max-width:480px){
     .ai-chat-panel{ right:.5rem; left:.5rem; width:auto; bottom:.5rem; height:70vh; }
   }
+
+  /* ---- 新增：價格 $$ 顯示切換 ---- */
+  .price-toggle-btn{
+    display:inline-flex; align-items:center; gap:6px;
+    border:1px solid #1f4b63; color:#1f4b63; background:#fff;
+    border-radius:8px; padding:6px 12px; font-size:13px; font-weight:600; cursor:pointer;
+  }
+  .price-toggle-btn:hover{ background:#dce6ea; }
+  .price-toggle-btn.is-on{ background:#1f4b63; color:#fff; }
+  .price-row{ display:none; }
+  .prices-revealed .price-row{ display:table-row; }
+
+  /* ---- 新增：圖片放大 Lightbox ---- */
+  .zoomable{ cursor:zoom-in; }
+  #lightbox{
+    position:fixed; inset:0; z-index:9999;
+    background:rgba(15,18,16,.92);
+    display:none; align-items:center; justify-content:center; padding:2rem;
+  }
+  #lightbox.open{ display:flex; }
+  #lightbox img{
+    max-width:100%; max-height:100%; -o-object-fit:contain; object-fit:contain;
+    border-radius:8px;
+  }
+  #lightbox-close{
+    position:fixed; top:1rem; right:1rem; z-index:10000;
+    width:40px; height:40px; border-radius:9999px; border:none;
+    background:rgba(255,255,255,.15); color:#fff; font-size:1.1rem;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+  }
+  #lightbox-close:hover{ background:rgba(255,255,255,.28); }
+
+  /* ---- 新增：組合資訊卡（瓶身／配件／蓋子 各自的規格摘要） ---- */
+  .combo-info-card{
+    border:1px solid #d9dacd; border-radius:10px; padding:.75rem .875rem; margin-bottom:.625rem;
+  }
+  .combo-info-role{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:10.5px; letter-spacing:.08em; color:#a1631d; margin:0 0 2px;
+  }
+  .combo-info-name{ font-weight:700; font-size:14px; margin:0 0 4px; color:#1d2420; }
+  .combo-info-line{ font-size:12.5px; color:#6d7368; margin:0; }
 </style>
 </head>
 <body class="bg-bg text-ink font-body min-h-screen m-0">
 
-<!-- ============ 載入中畫面 ============ -->
 <div id="loading-overlay" class="fixed inset-0 flex items-center justify-center" style="z-index:9999;background:#eef0e8;">
   <div class="text-center">
     <div class="qs-spinner mx-auto mb-3"></div>
@@ -88,7 +127,6 @@
   </div>
 </div>
 
-<!-- ============ 錯誤提示列 ============ -->
 <div id="error-banner" class="hidden fixed inset-x-0 top-0 px-4 py-3 flex items-center justify-between gap-3" style="z-index:9999;background:#b3261e;color:#fff;">
   <span id="error-message" class="flex-1 text-sm"></span>
   <button id="error-retry" type="button" class="flex-none rounded-lg px-3 py-1.5 text-xs font-semibold" style="border:1px solid rgba(255,255,255,.6);">
@@ -116,7 +154,7 @@
         class="w-full rounded-xl border border-line bg-surface-2 focus:bg-surface focus:border-accent pl-11 dt:pl-12 pr-4 py-3.5 dt:py-4 text-[15px] dt:text-base text-ink placeholder:text-ink-muted outline-none transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" />
     </div>
   </div>
-  <p class="text-center mt-2 text-[11px] dt:text-xs text-ink-muted px-2">搜尋範圍：簡稱・產品型號・類型・容量・主顏色・尺寸_外徑・尺寸_高度</p>
+  <p class="text-center mt-2 text-[11px] dt:text-xs text-ink-muted px-2">搜尋範圍：簡稱・產品型號・類型・容量・主顏色・尺寸_外徑・尺寸_高度・關聯組合資訊</p>
 </header>
 
 <div class="max-w-[1280px] mx-auto dt:flex dt:items-start">
@@ -169,7 +207,11 @@
   <div id="detail-body" class="px-5 pt-4 pb-10"></div>
 </div>
 
-<!-- ============ Gemini AI 小幫手 ============ -->
+<div id="lightbox">
+  <img id="lightbox-img" src="" alt="">
+</div>
+<button id="lightbox-close" type="button" style="display:none;" aria-label="關閉大圖">✕</button>
+
 <button id="ai-fab" type="button" class="ai-fab" aria-label="開啟 AI 小幫手">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M12 2a2 2 0 0 1 2 2v1h1a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3h1V4a2 2 0 0 1 2-2Z"></path>
@@ -195,42 +237,22 @@
 </div>
 
 <script>
-// ============================================================
-// ★★★ 請在這裡填入你三個 Google 試算表分頁「發布至網路」後取得的 CSV 網址 ★★★
-// 設定步驟請見對話中的教學說明。三個網址分別對應：
-//   products : 產品資料（所有瓶身＋配件合併在同一個分頁）
-//   series   : 系列圖（系列名稱 → 系列示意圖）
-//   links    : 產品與配件關聯表
-// ============================================================
 const SHEET_URLS = {
   products: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRyobzl7xsgGlOPlJ9-2jICgvvgzdvZhDzvPB2hQNi_ogdCuB2DeM4x3owVsczjj-Cv-y49UCdPrt2O/pub?gid=1996606623&single=true&output=csv',
   series:   'https://docs.google.com/spreadsheets/d/e/2PACX-1vRyobzl7xsgGlOPlJ9-2jICgvvgzdvZhDzvPB2hQNi_ogdCuB2DeM4x3owVsczjj-Cv-y49UCdPrt2O/pub?gid=169257382&single=true&output=csv',
   links:    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRyobzl7xsgGlOPlJ9-2jICgvvgzdvZhDzvPB2hQNi_ogdCuB2DeM4x3owVsczjj-Cv-y49UCdPrt2O/pub?gid=1853839820&single=true&output=csv',
 };
 
-// ============================================================
-// ★★★ 請在這裡填入你的 Gemini API Key ★★★
-// 注意：這是純前端網頁，金鑰會出現在原始碼中，任何人「檢視原始碼」都看得到。
-// 建議到 Google AI Studio / Google Cloud Console，把這把金鑰加上
-// 「HTTP 參照網址限制（HTTP referrer restrictions）」，只允許你部署網站的網域
-// （例如 https://你的帳號.github.io/*）呼叫，降低金鑰被盜用的風險。
-// ============================================================
-const GEMINI_API_KEY = 'AQ.Ab8RN6LrKpQGU_kj9b8AjzpE68INzsj0dfIgQDHXV29G5sPyTA';
+const GEMINI_API_KEY = 'PASTE_YOUR_OWN_KEY_HERE';
 const GEMINI_MODEL = 'gemini-2.5-flash';
 
-// 這幾種「類型」視為配件（而非瓶身），容量篩選預設不顯示它們的容量，
-// 要點進對應類型後才會出現。如果之後配件表新增其他類型，把它加進這個陣列即可。
-const ACCESSORY_TYPES = ['噴頭', '壓頭', '噴槍'];
+const ACCESSORY_TYPES = ['噴頭', '壓頭', '噴槍', '蓋子'];
 
-// ---------- 執行期資料容器（先給空殼，fetch 完成後才填入） ----------
 const CATALOG = { products: [], links: [] };
 let seriesImages = {};
 let productsById = {};
 let accessoriesByBottle = {};
 
-// ============================================================
-// CSV 解析（不依賴任何外部套件，能處理欄位內含逗號/換行/引號的情況）
-// ============================================================
 function parseCSV(text) {
   const rows = [];
   let row = [], field = '', inQuotes = false;
@@ -244,7 +266,7 @@ function parseCSV(text) {
     } else {
       if (c === '"') inQuotes = true;
       else if (c === ',') { row.push(field); field = ''; }
-      else if (c === '\r') { /* ignore, \n 會處理換行 */ }
+      else if (c === '\r') { /* ignore */ }
       else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
       else field += c;
     }
@@ -253,7 +275,7 @@ function parseCSV(text) {
   return rows.filter(r => !(r.length === 1 && r[0] === ''));
 }
 function csvToObjects(text) {
-  const cleaned = text.replace(/^\uFEFF/, ''); // 去掉 BOM
+  const cleaned = text.replace(/^\uFEFF/, '');
   const rows = parseCSV(cleaned);
   if (!rows.length) return [];
   const headers = rows[0].map(h => h.trim());
@@ -278,10 +300,9 @@ function toNumber(v) {
   return isNaN(n) ? null : n;
 }
 
-// ---------- Google Drive 分享連結 -> 可直接載入的圖片網址 ----------
 const DRIVE_ID_PATTERNS = [
-  /\/d\/([a-zA-Z0-9_-]{10,})/,        // .../file/d/FILE_ID/view...
-  /[?&]id=([a-zA-Z0-9_-]{10,})/,       // .../open?id=FILE_ID , .../uc?id=FILE_ID
+  /\/d\/([a-zA-Z0-9_-]{10,})/,
+  /[?&]id=([a-zA-Z0-9_-]{10,})/,
 ];
 function resolveDriveImageUrl(url) {
   if (!url) return null;
@@ -297,9 +318,6 @@ function resolveDriveImageUrl(url) {
   return u;
 }
 
-// ============================================================
-// CSV 一列 -> 產品物件（欄位名稱對應原本 Excel 表頭，維持一致）
-// ============================================================
 function rowToProduct(r) {
   const productId = emptyToNull(r['產品型號']);
   const type = emptyToNull(r['類型']);
@@ -319,9 +337,10 @@ function rowToProduct(r) {
     mainColor: emptyToNull(r['主顏色']),
     specification: emptyToNull(r['規格']),
     shape: emptyToNull(r['造型']),
-    setPrice: toNumber(r['整組價']),
-    bottlePrice: toNumber(r['裸瓶價']),
-    bottleCapPrice: toNumber(r['瓶+蓋價']),
+    bottleCostPrice: toNumber(r['裸瓶成本價']),
+    bottleListPrice: toNumber(r['裸瓶表價']),
+    bottleCapCostPrice: toNumber(r['瓶+蓋成本價']),
+    bottleCapListPrice: toNumber(r['瓶+蓋表價']),
     threadSize: emptyToNull(r['牙徑']),
     outerMaterial: emptyToNull(r['外瓶材質']),
     innerMaterial: emptyToNull(r['內瓶材質']),
@@ -333,6 +352,7 @@ function rowToProduct(r) {
     supplier: emptyToNull(r['廠商']),
     stockQty: toNumber(r['庫存數量']),
     imageUrl: resolveDriveImageUrl(emptyToNull(r['圖片'])),
+    notes: emptyToNull(r['注意事項']),
     isAccessory: ACCESSORY_TYPES.includes(type),
   };
 }
@@ -350,24 +370,27 @@ function buildLinks(rows) {
     id: emptyToNull(r['關聯編號 (ID)']) || `R-${idx + 1}`,
     bottleId: emptyToNull(r['瓶身編號 (Bottle_ID)']),
     dispenserId: emptyToNull(r['配件編號 (Dispenser_ID)']),
+    capId: emptyToNull(r['蓋子編號 (Cap_ID)']),
     imageUrl: resolveDriveImageUrl(emptyToNull(r['圖片'])),
+    setPrice: toNumber(r['整組價']),
+    bottleMoq: toNumber(r['瓶身MOQ']),
+    capMoq: toNumber(r['蓋子MOQ']),
+    dispenserMoq: toNumber(r['壓頭MOQ']),
     note: emptyToNull(r['備註 (Note)']),
-  })).filter(l => l.bottleId && l.dispenserId);
+  })).filter(l => l.bottleId && (l.dispenserId || l.capId));
 }
 function rebuildIndexes() {
   productsById = {};
   CATALOG.products.forEach(p => { productsById[p.productId] = p; });
   accessoriesByBottle = {};
   CATALOG.links.forEach(link => {
-    const accessory = productsById[link.dispenserId];
-    if (!accessory) return;
-    (accessoriesByBottle[link.bottleId] ||= []).push({ accessory, link });
+    const accessory = link.dispenserId ? productsById[link.dispenserId] : null;
+    const capProduct = link.capId ? productsById[link.capId] : null;
+    if (!accessory && !capProduct) return;
+    (accessoriesByBottle[link.bottleId] ||= []).push({ accessory, capProduct, link });
   });
 }
 
-// ============================================================
-// 載入中 / 錯誤畫面
-// ============================================================
 function showLoading() { document.getElementById('loading-overlay').classList.remove('hidden'); }
 function hideLoading() { document.getElementById('loading-overlay').classList.add('hidden'); }
 function showError(msg) {
@@ -424,16 +447,11 @@ async function loadCatalog() {
   }
 }
 
-// ============================================================
-// Gemini AI 小幫手
-// ============================================================
 let chatHistory = [];
 let catalogContextText = '';
 
-// 把目前的產品資料整理成精簡文字，當作 AI 回答時的參考資料（system instruction 的一部分）
 function buildCatalogContext() {
   const lines = CATALOG.products.map(p => {
-    const price = primaryPrice(p);
     return [
       `簡稱:${p.shortName || p.productId}`,
       `型號:${p.productId}`,
@@ -442,7 +460,6 @@ function buildCatalogContext() {
       p.material ? `材質:${p.material}` : null,
       p.capacityRaw ? `容量:${p.capacityRaw}mL` : null,
       p.mainColor ? `主顏色:${p.mainColor}` : null,
-      price !== null ? `價格:NT$${price}` : null,
       p.threadSize ? `牙徑:${p.threadSize}` : null,
       p.supplier ? `廠商:${p.supplier}` : null,
       typeof p.stockQty === 'number' ? `庫存:${p.stockQty}` : null,
@@ -453,9 +470,9 @@ function buildCatalogContext() {
 function systemPrompt() {
   return `你是「產品規格目錄」網站內建的 AI 小幫手，服務兩種問題：
 
-1. 查詢／比較目錄裡的產品：這類問題請優先根據下方「產品資料庫」回答（每一列是一項產品，以｜分隔不同欄位）。資料庫裡查不到的「特定產品資訊」（例如某個型號確切的庫存數字），要誠實告知使用者「目前資料庫沒有這項資訊」，不要瞎猜編造數字。
+1. 查詢／比較目錄裡的產品：這類問題請優先根據下方「產品資料庫」回答（每一列是一項產品，以｜分隔不同欄位）。資料庫裡查不到的「特定產品資訊」，要誠實告知使用者「目前資料庫沒有這項資訊」，不要瞎猜編造數字。
 
-2. 包材／材質相關的一般知識問題：例如各種塑膠或玻璃、壓克力容器的耐溫範圍、耐酸鹼性、是否可微波、食品級／化妝品級安全性、清潔保養方式、與化妝品成分的相容性等。這類問題「不受限於資料庫內容」，請直接運用你自己既有的專業知識完整回答，不要因為資料庫裡沒寫就說不知道；如果材質資訊不夠精確（例如沒寫是哪一種塑膠牌號），可以先給該類材質（PET、PETG、PP、PE、壓克力/MS、玻璃等）常見的耐溫區間與注意事項，並提醒使用者實際耐受度仍需以廠商標示或供應商規格為準。
+2. 包材／材質相關的一般知識問題。這類問題不受限於資料庫內容，請直接運用你自己既有的專業知識完整回答。
 
 一律使用繁體中文（台灣習慣用語）回答，語氣自然、切中重點即可。
 
@@ -535,7 +552,7 @@ document.getElementById('ai-fab').addEventListener('click', () => {
   document.getElementById('ai-chat-panel').classList.remove('hidden');
   document.getElementById('ai-fab').style.display = 'none';
   if (document.getElementById('chat-messages').children.length === 0) {
-    appendChatBubble('model', '你好！我是這個目錄的 AI 小幫手，可以幫你查詢比較目錄產品，也能回答包材相關的一般知識，例如材質耐溫、是否可微波、保養清潔方式等，歡迎直接問我 🙂');
+    appendChatBubble('model', '你好！我是這個目錄的 AI 小幫手，歡迎直接問我 🙂');
   }
 });
 document.getElementById('ai-chat-close').addEventListener('click', () => {
@@ -551,17 +568,14 @@ document.getElementById('chat-input').addEventListener('keydown', e => {
   }
 });
 
-// ============================================================
-// 篩選狀態
-// ============================================================
 const state = {
   keyword: '',
   selected: { type: new Set(), material: new Set(), capacity: new Set(), thread: new Set(), shape: new Set(), color: new Set() },
   currentSeries: null,
 };
 let detailStack = [];
+let pricesRevealed = false;
 
-// requiresType: true 代表這組篩選要等使用者至少選了一個「類型」才會出現
 const FILTER_DEFS = [
   { key: 'type',     label: '類型', field: 'type' },
   { key: 'material', label: '材質', field: 'material', requiresType: true },
@@ -575,6 +589,18 @@ function browsableProducts() {
   return CATALOG.products;
 }
 
+function comboHaystackFor(p) {
+  if (p.isAccessory) return '';
+  const pairs = accessoriesByBottle[p.productId] || [];
+  const parts = [];
+  pairs.forEach(({ accessory, capProduct, link }) => {
+    parts.push(link.id, link.note);
+    if (accessory) parts.push(accessory.productId, accessory.shortName);
+    if (capProduct) parts.push(capProduct.productId, capProduct.shortName);
+  });
+  return parts.filter(Boolean).join(' ');
+}
+
 function applyExcept(exceptKey) {
   return browsableProducts().filter(p => {
     for (const def of FILTER_DEFS) {
@@ -586,7 +612,7 @@ function applyExcept(exceptKey) {
       const k = state.keyword.toLowerCase();
       const haystack = [
         p.shortName, p.productId, p.type, p.capacityRaw, p.mainColor,
-        p.outerDiameterMm, p.heightMm,
+        p.outerDiameterMm, p.heightMm, comboHaystackFor(p),
       ].filter(v => v !== null && v !== undefined && v !== '').join(' ').toLowerCase();
       if (!haystack.includes(k)) return false;
     }
@@ -611,8 +637,6 @@ function distinctSorted(values, numeric) {
 
 function filteredProducts() { return applyExcept(''); }
 
-// 容量的可選清單有特殊規則：使用者還沒選到「噴頭／壓頭／噴槍」這類配件的類型之前，
-// 配件本身的容量值（例如 0.12、0.25）不會出現在容量篩選清單裡，避免跟瓶身容量混在一起。
 function availableFor(def) {
   if (def.key === 'capacity') {
     const typeSel = state.selected.type;
@@ -627,7 +651,7 @@ function hasActiveFilters() { return FILTER_DEFS.some(def => state.selected[def.
 function toggleFilter(key, value) {
   const set = state.selected[key];
   if (set.has(value)) set.delete(value); else set.add(value);
-  state.currentSeries = null; // 篩選條件變了，回到系列總覽
+  state.currentSeries = null;
   render();
 }
 function clearFilters() {
@@ -636,7 +660,6 @@ function clearFilters() {
   render();
 }
 
-// ---------- 格式化 ----------
 function fmtNum(v) {
   if (v === null || v === undefined) return null;
   return String(v);
@@ -645,29 +668,24 @@ function fmtPrice(v) {
   const f = fmtNum(v);
   return f === null ? null : `NT$${f}`;
 }
-function primaryPrice(p) {
-  if (p.setPrice !== null && p.setPrice !== undefined) return p.setPrice;
-  if (p.bottlePrice !== null && p.bottlePrice !== undefined) return p.bottlePrice;
-  if (p.bottleCapPrice !== null && p.bottleCapPrice !== undefined) return p.bottleCapPrice;
-  return null;
-}
 function specRows(p) {
   return [
     ['材質', p.material], ['類型', p.type], ['容量', p.capacityRaw],
     ['實際滿容量', fmtNum(p.actualFullCapacity)],
     ['外徑 (mm)', fmtNum(p.outerDiameterMm)], ['高度 (mm)', fmtNum(p.heightMm)],
     ['主顏色', p.mainColor], ['造型', p.shape], ['牙徑', p.threadSize],
-    ['整組價', fmtPrice(p.setPrice)], ['裸瓶價', fmtPrice(p.bottlePrice)], ['瓶+蓋價', fmtPrice(p.bottleCapPrice)],
+    ['裸瓶成本價', fmtPrice(p.bottleCostPrice), true], ['裸瓶表價', fmtPrice(p.bottleListPrice), true],
+    ['瓶+蓋成本價', fmtPrice(p.bottleCapCostPrice), true], ['瓶+蓋表價', fmtPrice(p.bottleCapListPrice), true],
     ['外瓶材質', p.outerMaterial], ['內瓶材質', p.innerMaterial],
     ['中束', p.centerTube], ['墊片', p.gasket], ['蓋子', p.cap],
     ['裸瓶MOQ', fmtNum(p.bottleMoq)], ['加工MOQ', fmtNum(p.processingMoq)],
     ['廠商', p.supplier], ['庫存數量', fmtNum(p.stockQty)],
+    ['注意事項', p.notes],
   ];
 }
 function accessorySpecRows(p) { return specRows(p).filter(([label]) => label !== '容量'); }
 function categoryLabel(p) { return p.isAccessory ? '配件' : '瓶身'; }
 
-// ---------------------- Render ----------------------
 function render() {
   renderFilterGroups();
   renderGrid();
@@ -685,7 +703,6 @@ function renderFilterGroups() {
   container.innerHTML = '';
 
   FILTER_DEFS.forEach(def => {
-    // 材質／主顏色：使用者還沒選任何「類型」之前，整組先不出現
     if (def.requiresType && state.selected.type.size === 0) return;
 
     const available = availableFor(def);
@@ -736,6 +753,8 @@ function productImageHtml(url, altText, opts) {
   const o = opts || {};
   const cls = o.sizeClass || 'w-full h-full object-cover';
   const compact = !!o.compact;
+  const zoomAttr = (!compact && url) ? ` data-zoom-src="${escapeAttr(url)}"` : '';
+  const zoomClass = (!compact && url) ? ' zoomable' : '';
   const missingHtml = compact
     ? '<span class="text-[10px] text-ink-muted">無圖</span>'
     : '<span class="font-mono text-[11px] text-ink-muted text-center px-2.5 leading-snug">無圖片</span>';
@@ -743,7 +762,7 @@ function productImageHtml(url, altText, opts) {
   const errorHtml = compact
     ? '<span class=&quot;text-[10px] text-ink-muted&quot;>無圖</span>'
     : '<span class=&quot;font-mono text-[11px] text-ink-muted text-center px-2.5 leading-snug&quot;>圖片無法載入<br>（雲端硬碟分享連結非直連）</span>';
-  return `<img src="${escapeAttr(url)}" alt="${escapeAttr(altText)}" class="${cls}" onerror="this.outerHTML='${errorHtml}'">`;
+  return `<img src="${escapeAttr(url)}" alt="${escapeAttr(altText)}" class="${cls}${zoomClass}"${zoomAttr} onerror="this.outerHTML='${errorHtml}'">`;
 }
 
 function escapeAttr(s) {
@@ -754,7 +773,6 @@ function escapeHtml(s) {
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-// ---------------------- Grid：系列總覽 ↔ 系列內細項 ↔ 搜尋結果 ----------------------
 function groupBySeries(list) {
   const map = new Map();
   list.forEach(p => {
@@ -816,7 +834,7 @@ function renderSeriesGrid(grid, list) {
     return `
       <article class="series-card bg-surface border border-line rounded-[10px] overflow-hidden cursor-pointer shadow-card hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 transition-transform" data-series="${escapeAttr(name)}">
         <div class="relative aspect-square bg-surface-2 flex items-center justify-center">
-          ${productImageHtml(img, name)}
+          ${productImageHtml(img, name, {compact: true})}
         </div>
         <div class="px-3 pt-2.5 pb-3.5 text-center">
           <h3 class="text-[15px] dt:text-base font-semibold truncate">${escapeHtml(name)}</h3>
@@ -834,7 +852,6 @@ function renderSeriesGrid(grid, list) {
   });
 }
 
-// 產品卡片：簡稱、主顏色、容量、價格（系列圖卡片不會用到這個函式）
 function renderProductCards(grid, list) {
   if (list.length === 0) {
     grid.innerHTML = `<div class="col-span-full text-center text-ink-muted text-sm py-16">沒有符合篩選條件的產品</div>`;
@@ -842,19 +859,17 @@ function renderProductCards(grid, list) {
   }
 
   grid.innerHTML = list.map(p => {
-    const price = fmtPrice(primaryPrice(p));
     return `
     <article class="card bg-surface border border-line rounded-[10px] overflow-hidden cursor-pointer shadow-card hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 transition-transform" data-id="${escapeAttr(p.productId)}">
       <div class="relative aspect-square bg-surface-2 flex items-center justify-center">
         <span class="absolute top-2 left-2 z-10 font-mono text-[10px] tracking-wide px-1.5 py-0.5 rounded text-white ${p.isAccessory ? 'bg-stampaccessory' : 'bg-stampbottle'}">${categoryLabel(p)}</span>
-        ${productImageHtml(p.imageUrl, p.shortName || p.productId)}
+        ${productImageHtml(p.imageUrl, p.shortName || p.productId, {compact: true})}
       </div>
       <div class="px-3 pt-2.5 pb-3.5">
         <p class="font-mono text-xs text-ink-muted m-0">${escapeHtml(p.productId)}</p>
         <h3 class="text-[15px] dt:text-base font-semibold mt-0.5 mb-1 truncate">${escapeHtml(p.shortName || p.productId)}</h3>
         <p class="text-[12.5px] text-ink-muted m-0 truncate">${escapeHtml(p.mainColor || '—')}</p>
-        <p class="text-[12.5px] text-ink-muted m-0 truncate">${escapeHtml(p.capacityRaw ? p.capacityRaw + ' mL' : '—')}</p>
-        <p class="text-[13px] text-accent font-semibold mt-0.5 m-0 truncate">${escapeHtml(price || '—')}</p>
+        <p class="text-[12.5px] text-ink-muted m-0 truncate">${escapeHtml(p.capacityRaw || '—')}</p>
       </div>
     </article>
   `;
@@ -865,12 +880,13 @@ function renderProductCards(grid, list) {
   });
 }
 
-// ---------------------- Detail overlay ----------------------
 function openDetail(id, extra) {
   detailStack.push({
     id,
     comboImageUrl: extra && extra.comboImageUrl ? extra.comboImageUrl : null,
     comboWithLabel: extra && extra.comboWithLabel ? extra.comboWithLabel : null,
+    comboLink: extra && extra.comboLink ? extra.comboLink : null,
+    comboCapId: extra && extra.comboCapId ? extra.comboCapId : null,
   });
   renderDetail();
   document.getElementById('backdrop').classList.remove('hidden');
@@ -885,6 +901,48 @@ function backDetail() {
   detailStack.pop();
   if (detailStack.length === 0) { closeDetail(); return; }
   renderDetail();
+}
+
+function priceToggleHtml() {
+  return `<button type="button" id="price-toggle" class="price-toggle-btn${pricesRevealed ? ' is-on' : ''}">
+    $$ ${pricesRevealed ? '隱藏價格' : '顯示價格'}
+  </button>`;
+}
+
+function specTableHtml(rows) {
+  const trs = rows
+    .filter(([, value]) => value !== null && value !== undefined && String(value).trim() !== '')
+    .map(([label, value, isPrice]) => `
+      <tr class="${isPrice ? 'price-row' : ''} border-b border-line align-top">
+        <td class="w-24 pt-2.5 pb-1.5 pr-2 font-mono text-[11.5px] tracking-wide text-ink-muted align-top whitespace-nowrap">${escapeHtml(label)}</td>
+        <td class="py-1.5 text-[13.5px] text-ink align-top">${escapeHtml(value)}</td>
+      </tr>
+    `).join('');
+  return `<table class="w-full border-collapse"><tbody>${trs}</tbody></table>`;
+}
+
+// 組合資訊卡：瓶身／配件（壓頭噴頭噴槍）／蓋子 各自的規格摘要（尺寸、價格、廠商）
+function comboInfoCardHtml(role, product) {
+  if (!product) return '';
+  const size = [
+    product.outerDiameterMm ? `外徑 ${fmtNum(product.outerDiameterMm)}mm` : null,
+    product.heightMm ? `高度 ${fmtNum(product.heightMm)}mm` : null,
+  ].filter(Boolean).join(' · ') || '—';
+  const priceLine = pricesRevealed
+    ? [
+        product.bottleCostPrice != null ? `成本 ${fmtPrice(product.bottleCostPrice)}` : null,
+        product.bottleListPrice != null ? `表價 ${fmtPrice(product.bottleListPrice)}` : null,
+      ].filter(Boolean).join(' / ') || '未設定價格'
+    : '點上方「$$ 顯示價格」查看';
+  return `
+    <div class="combo-info-card">
+      <p class="combo-info-role">${escapeHtml(role)}</p>
+      <p class="combo-info-name">${escapeHtml(product.shortName || product.productId)}　<span class="font-mono text-[11px] text-ink-muted">${escapeHtml(product.productId)}</span></p>
+      <p class="combo-info-line">尺寸：${escapeHtml(size)}</p>
+      <p class="combo-info-line">價格：${escapeHtml(priceLine)}</p>
+      <p class="combo-info-line">廠商：${escapeHtml(product.supplier || '—')}</p>
+    </div>
+  `;
 }
 
 function renderDetail() {
@@ -902,33 +960,30 @@ function renderDetail() {
   }
 
   const rows = p.isAccessory ? accessorySpecRows(p) : specRows(p);
-  const rowsHtml = rows
-    .filter(([, value]) => value !== null && value !== undefined && String(value).trim() !== '')
-    .map(([label, value]) => `
-      <tr class="border-b border-line align-top">
-        <td class="w-24 pt-2.5 pb-1.5 pr-2 font-mono text-[11.5px] tracking-wide text-ink-muted align-top whitespace-nowrap">${escapeHtml(label)}</td>
-        <td class="py-1.5 text-[13.5px] text-ink align-top">${escapeHtml(value)}</td>
-      </tr>
-    `).join('');
 
   let accessoriesHtml = '';
   if (!p.isAccessory) {
     const pairs = accessoriesByBottle[p.productId] || [];
     const itemsHtml = pairs.length === 0
       ? `<p class="text-[13px] text-ink-muted">目前沒有設定可搭配的配件（可在「產品與配件關聯表」新增一列）</p>`
-      : pairs.map(({ accessory, link }) => {
-          const meta = [accessory.type, accessory.threadSize ? `牙徑 ${accessory.threadSize}` : null, accessory.mainColor]
-            .filter(Boolean).join(' · ');
-          const thumbUrl = link.imageUrl || accessory.imageUrl;
+      : pairs.map(({ accessory, capProduct, link }) => {
+          const primary = accessory || capProduct;
+          const metaParts = [];
+          if (accessory) metaParts.push(accessory.type);
+          if (accessory && accessory.threadSize) metaParts.push(`牙徑 ${accessory.threadSize}`);
+          if (capProduct) metaParts.push(`蓋子：${capProduct.shortName || capProduct.productId}`);
+          const thumbUrl = link.imageUrl || (primary && primary.imageUrl);
           return `
             <div class="accessory-item flex items-center gap-2.5 p-2.5 border border-line rounded-lg mb-2 cursor-pointer hover:border-accent"
-                 data-id="${escapeAttr(accessory.productId)}"
+                 data-id="${escapeAttr(primary ? primary.productId : '')}"
                  data-combo-image="${escapeAttr(link.imageUrl || '')}"
-                 data-combo-label="${escapeAttr(p.shortName || p.productId)}">
-              <div class="w-10 h-10 rounded-full bg-surface-2 flex items-center justify-center overflow-hidden flex-none text-[10px] text-ink-muted">${productImageHtml(thumbUrl, accessory.shortName || accessory.productId, {compact: true, sizeClass: 'w-full h-full object-cover'})}</div>
+                 data-combo-label="${escapeAttr(p.shortName || p.productId)}"
+                 data-combo-link="${escapeAttr(link.id || '')}"
+                 data-combo-cap="${escapeAttr(capProduct ? capProduct.productId : '')}">
+              <div class="w-10 h-10 rounded-full bg-surface-2 flex items-center justify-center overflow-hidden flex-none text-[10px] text-ink-muted">${productImageHtml(thumbUrl, (primary && (primary.shortName || primary.productId)) || '組合', {compact: true})}</div>
               <div class="min-w-0">
-                <p class="text-sm font-semibold m-0 truncate">${escapeHtml(accessory.shortName || accessory.productId)}</p>
-                <p class="text-xs text-ink-muted mt-0.5 truncate">${escapeHtml(meta)}</p>
+                <p class="text-sm font-semibold m-0 truncate">${escapeHtml(primary ? (primary.shortName || primary.productId) : '（未指定配件）')}</p>
+                <p class="text-xs text-ink-muted mt-0.5 truncate">${escapeHtml(metaParts.filter(Boolean).join(' · '))}</p>
               </div>
             </div>
           `;
@@ -946,25 +1001,76 @@ function renderDetail() {
     </div>
   ` : '';
 
+  // 組合資訊：瓶身／配件／蓋子 各自的尺寸、價格、廠商摘要（只有透過搭配清單點進來才有）
+  let comboInfoHtml = '';
+  if (entry.comboLink) {
+    const bottleForCombo = !p.isAccessory ? p : (entry.comboWithLabel ? Object.values(productsById).find(x => (x.shortName || x.productId) === entry.comboWithLabel) : null);
+    const capForCombo = entry.comboCapId ? productsById[entry.comboCapId] : null;
+    const parts = [
+      comboInfoCardHtml('瓶身 BOTTLE', bottleForCombo),
+      comboInfoCardHtml('配件（壓頭／噴頭／噴槍） ACCESSORY', p.isAccessory ? p : null),
+      comboInfoCardHtml('蓋子 CAP', capForCombo),
+    ].filter(Boolean).join('');
+    if (parts) {
+      comboInfoHtml = `<h4 class="font-display font-bold text-lg mt-6 mb-2.5">組合資訊</h4>${parts}`;
+    }
+  }
+
   body.innerHTML = `
     <div class="w-full aspect-[4/3] rounded-[10px] overflow-hidden bg-surface-2 flex items-center justify-center mb-4">
       ${productImageHtml(p.imageUrl, p.shortName || p.productId)}
     </div>
-    <span class="font-mono text-[11px] tracking-[0.1em] text-ink-muted">${escapeHtml(categoryLabel(p))} · ${escapeHtml(p.series || p.type || '')}</span>
+    <div class="flex items-center justify-between gap-2 mb-1">
+      <span class="font-mono text-[11px] tracking-[0.1em] text-ink-muted">${escapeHtml(categoryLabel(p))} · ${escapeHtml(p.series || p.type || '')}</span>
+      ${priceToggleHtml()}
+    </div>
     <h2 class="font-display font-extrabold text-[24px] dt:text-[26px] mt-0.5 mb-1">${escapeHtml(p.shortName || p.productId)}</h2>
     <p class="font-mono text-xs text-ink-muted mb-3.5">${escapeHtml(p.productId)}</p>
-    <table class="w-full border-collapse"><tbody>${rowsHtml}</tbody></table>
+    <div class="${pricesRevealed ? 'prices-revealed' : ''}">${specTableHtml(rows)}</div>
     ${comboHtml}
+    ${comboInfoHtml}
     ${accessoriesHtml}
   `;
+
+  const toggleBtn = document.getElementById('price-toggle');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      pricesRevealed = !pricesRevealed;
+      renderDetail();
+    });
+  }
 
   body.querySelectorAll('.accessory-item').forEach(el => {
     el.addEventListener('click', () => openDetail(el.dataset.id, {
       comboImageUrl: el.dataset.comboImage || null,
       comboWithLabel: el.dataset.comboLabel || null,
+      comboLink: el.dataset.comboLink || null,
+      comboCapId: el.dataset.comboCap || null,
     }));
   });
 }
+
+// ---------------------- Lightbox ----------------------
+function openLightbox(url) {
+  document.getElementById('lightbox-img').src = url;
+  document.getElementById('lightbox').classList.add('open');
+  document.getElementById('lightbox-close').style.display = 'flex';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.getElementById('lightbox-close').style.display = 'none';
+  document.getElementById('lightbox-img').src = '';
+}
+document.addEventListener('click', e => {
+  const zoomTarget = e.target.closest('[data-zoom-src]');
+  if (zoomTarget) {
+    e.stopPropagation();
+    openLightbox(zoomTarget.getAttribute('data-zoom-src'));
+  }
+});
+document.getElementById('lightbox').addEventListener('click', closeLightbox);
+document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
 // ---------------------- Wiring ----------------------
 document.getElementById('search-input').addEventListener('input', e => {
@@ -981,7 +1087,6 @@ document.getElementById('series-back').addEventListener('click', () => {
 });
 document.getElementById('error-retry').addEventListener('click', loadCatalog);
 
-// ---------------------- 啟動：改成從 Google 試算表抓資料 ----------------------
 loadCatalog();
 </script>
 </body>
