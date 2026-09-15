@@ -376,12 +376,12 @@ function rowToProduct(r) {
     mainColor: emptyToNull(r['主顏色']),
     specification: emptyToNull(r['規格']),
     shape: emptyToNull(r['造型']),
-    // 對照你實際試算表的表頭：這兩欄是「裸表價」「裸成本價」（沒有「瓶」字），
+    // 對照你實際試算表的表頭：這兩欄是「裸底價」「裸成本價」（沒有「瓶」字），
     // 瓶+蓋那兩欄則跟原本猜的一樣。
     bottleCostPrice: toNumber(r['裸成本價']),
-    bottleListPrice: toNumber(r['裸表價']),
+    bottleListPrice: toNumber(r['裸底價']),
     bottleCapCostPrice: toNumber(r['瓶+蓋成本價']),
-    bottleCapListPrice: toNumber(r['瓶+蓋表價']),
+    bottleCapListPrice: toNumber(r['瓶+蓋底價']),
     threadSize: emptyToNull(r['牙徑']),
     outerMaterial: emptyToNull(r['外瓶材質']),
     innerMaterial: emptyToNull(r['內瓶材質']),
@@ -428,10 +428,10 @@ function buildLinks(rows) {
     imageUrl: images[0] ? images[0].full : null,
     thumbUrl: images[0] ? images[0].thumb : null,
     images,
-    // 「整組價」原本是單一欄位，現在試算表拆成「整組表價」「整組成本價」兩欄
-    // （跟裸瓶那邊 裸成本價／裸表價 的拆法一樣）。舊的「整組價」欄位如果還留著，
-    // 當作表價的備援值，避免舊資料列（還沒補上新欄位）整組價直接消失不顯示。
-    setListPrice: toNumber(r['整組表價']) ?? toNumber(r['整組價']),
+    // 「整組價」原本是單一欄位，現在試算表拆成「整組底價」「整組成本價」兩欄
+    // （跟裸瓶那邊 裸成本價／裸底價 的拆法一樣）。舊的「整組價」欄位如果還留著，
+    // 當作底價的備援值，避免舊資料列（還沒補上新欄位）整組價直接消失不顯示。
+    setListPrice: toNumber(r['整組底價']) ?? toNumber(r['整組價']),
     setCostPrice: toNumber(r['整組成本價']),
     bottleMoq: toNumber(r['瓶身MOQ']),
     capMoq: toNumber(r['蓋子MOQ']),
@@ -653,8 +653,8 @@ function specRows(p) {
     ['實際滿容量', fmtNum(p.actualFullCapacity)],
     ['外徑 (mm)', fmtNum(p.outerDiameterMm)], ['高度 (mm)', fmtNum(p.heightMm)],
     ['主顏色', p.mainColor], ['造型', p.shape], ['牙徑', p.threadSize],
-    ['裸瓶成本價', fmtPrice(p.bottleCostPrice), true], ['裸瓶表價', fmtPrice(p.bottleListPrice), true],
-    ['瓶+蓋成本價', fmtPrice(p.bottleCapCostPrice), true], ['瓶+蓋表價', fmtPrice(p.bottleCapListPrice), true],
+    ['裸瓶成本價', fmtPrice(p.bottleCostPrice), true], ['裸瓶底價', fmtPrice(p.bottleListPrice), true],
+    ['瓶+蓋成本價', fmtPrice(p.bottleCapCostPrice), true], ['瓶+蓋底價', fmtPrice(p.bottleCapListPrice), true],
     ['外瓶材質', p.outerMaterial], ['內瓶材質', p.innerMaterial],
     ['中束', p.centerTube], ['墊片', p.gasket], ['蓋子', p.cap],
     ['裸瓶MOQ', fmtNum(p.bottleMoq)], ['加工MOQ', fmtNum(p.processingMoq)],
@@ -1150,7 +1150,7 @@ function comboInfoCardHtml(role, product) {
   const priceLine = pricesRevealed
     ? [
         product.bottleCostPrice != null ? `成本 ${fmtPrice(product.bottleCostPrice)}` : null,
-        product.bottleListPrice != null ? `表價 ${fmtPrice(product.bottleListPrice)}` : null,
+        product.bottleListPrice != null ? `底價 ${fmtPrice(product.bottleListPrice)}` : null,
       ].filter(Boolean).join(' / ') || '未設定價格'
     : '點上方「$$ 顯示價格」查看';
   // 廠商跟價格一起隱藏：沒按「顯示價格」之前，這行直接不顯示。
@@ -1168,9 +1168,9 @@ function comboInfoCardHtml(role, product) {
   `;
 }
 
-// 整組資訊卡：這筆關聯表資料本身的整組表價／整組成本價／各項 MOQ（不是任何單一
+// 整組資訊卡：這筆關聯表資料本身的整組底價／整組成本價／各項 MOQ（不是任何單一
 // 產品的欄位，是「產品與配件關聯表」那一列自己的欄位，所以獨立一張卡片顯示）。
-// 整組表價／整組成本價一樣受 $$ 顯示價格開關保護；MOQ 不算敏感價格資訊，一律顯示。
+// 整組底價／整組成本價一樣受 $$ 顯示價格開關保護；MOQ 不算敏感價格資訊，一律顯示。
 function comboOverallInfoHtml(link) {
   if (!link) return '';
   const hasCost = link.setCostPrice !== null && link.setCostPrice !== undefined;
@@ -1184,7 +1184,7 @@ function comboOverallInfoHtml(link) {
   const priceLine = pricesRevealed
     ? ([
         hasCost ? `成本 ${fmtPrice(link.setCostPrice)}` : null,
-        hasList ? `表價 ${fmtPrice(link.setListPrice)}` : null,
+        hasList ? `底價 ${fmtPrice(link.setListPrice)}` : null,
       ].filter(Boolean).join(' / ') || '未設定')
     : '點上方「$$ 顯示價格」查看';
   return `
